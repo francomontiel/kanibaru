@@ -12,9 +12,15 @@ States.Boot.prototype = {
 		//this.game.load = this.game.load.image('normalLegs', 'assets/images/duke/normalLegs.png');
 		this.game.load = this.game.load.image('redSplash', '/assets/images/red.png');
 
+		this.game.load = this.game.load.image('mapex', '/assets/images/terrain/mapex.png');
+
 		this.game.load = this.game.load.spritesheet('normalHead', 'assets/images/duke/normalHeadSheet.png', 110, 110);
 		this.game.load = this.game.load.spritesheet('normalTorso', 'assets/images/duke/normalTorsoSheet.png', 110, 110);
 		this.game.load = this.game.load.spritesheet('normalLegs', 'assets/images/duke/normalLegsSheet.png', 110, 110);
+		this.game.load = this.game.load.spritesheet('singleHead', 'assets/images/duke/singleHead.png', 110, 110);
+		this.game.load = this.game.load.spritesheet('singleTorso', 'assets/images/duke/singleTorso.png', 110, 110);
+		this.game.load = this.game.load.spritesheet('singleLegs', 'assets/images/duke/singleLegs.png', 110, 110);
+		
 		this.game.load = this.game.load.spritesheet('dukeCollider', 'assets/images/duke/collider.png');
 
 		this.game.load = this.game.load.image('obstacle', 'assets/images/terrain/obstacle.png');

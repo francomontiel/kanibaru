@@ -8,22 +8,25 @@ States.Play.prototype = {
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 	},
 	create: function(){
-		this.game.background = this.game.add.sprite(this.game.world.centerX - 190, this.game.world.centerY - 40, 'title');
+		//this.game.background = this.game.add.sprite(this.game.world.centerX - 190, this.game.world.centerY - 40, 'title');
+		this.game.background = this.game.add.sprite(0, 0, 'mapex');
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
 		this.game.cursors = game.input.keyboard.createCursorKeys();
 
+		this.game.camera.follow(this.game.Duke.colliderSprite);
+
 		this.game.obstacles = this.game.add.group();
 		this.game.obstacles.enableBody = true;
 
-		var obstacle = this.game.obstacles.create(300, 200, 'obstacle');
-		obstacle.body.immovable = true;
+		//var obstacle = this.game.obstacles.create(300, 200, 'obstacle');
+		//obstacle.body.immovable = true;
 
 		this.game.enemies = [];
-		var enemy = new BasicEnemyX(game, 50, 400, 400, 100, 100, 0, 10);
+		var enemy = new BasicEnemyX(game, 50, 200, 330, 150, 100, 0, 10);
 		enemy.render();
 		this.game.enemies.push(enemy);
-		enemy = new BasicEnemyY(game, 50, 600, 300, 100, 100, 0, 10);
+		enemy = new BasicEnemyY(game, 50, 600, 350, 100, 100, 0, 10);
 		enemy.render();
 		this.game.enemies.push(enemy);
 

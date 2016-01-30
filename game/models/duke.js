@@ -4,9 +4,9 @@ function Duke(game){
 	this.headSprite = null;
 	this.torsoSprite = null;
 	this.legsSprite = null;
-	this.head = 'normalHead';
-	this.torso = 'normalTorso';
-	this.legs = 'normalLegs';
+	this.head = 'singleHead';
+	this.torso = 'singleTorso';
+	this.legs = 'singleLegs';
 	this.speed = 150;
 	this.facing = 0; //Left=0; Right=1; Up=2; Down=3
 	this.sprite = null;
@@ -118,10 +118,10 @@ Duke.prototype.handleKeyDown = function() {
 }
 
 Duke.prototype.render = function(){
-	this.colliderSprite = this.game.add.sprite(0, 0, 'dukeCollider');
-	this.headSprite = this.game.add.sprite(0, 0, this.head);
-	this.torsoSprite = this.game.add.sprite(0, 0, this.torso);
-	this.legsSprite = this.game.add.sprite(0, 0, this.legs);
+	this.colliderSprite = this.game.add.sprite(10, 230, 'dukeCollider');
+	this.headSprite = this.game.add.sprite(10, 230, this.head);
+	this.torsoSprite = this.game.add.sprite(10, 230, this.torso);
+	this.legsSprite = this.game.add.sprite(10, 230, this.legs);
 
 	this.colliderSprite.alpha = 0;
 
@@ -132,20 +132,35 @@ Duke.prototype.render = function(){
 
 	this.colliderSprite.immovable = true;
 
+	//this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
+	//this.headSprite.animations.add('normalHeadRight', [1], 10, true);
+	//this.headSprite.animations.add('normalHeadUp', [2], 10, true);
+	//this.headSprite.animations.add('normalHeadDown', [3], 10, true);
+
+	//this.torsoSprite.animations.add('normalTorsoLeft', [1, 0, 2, 0], 10, true);
+	//this.torsoSprite.animations.add('normalTorsoRight', [1, 0, 2, 0], 10, true);
+	//this.torsoSprite.animations.add('normalTorsoUp', [1, 0, 2, 0], 10, true);
+	//this.torsoSprite.animations.add('normalTorsoDown', [1, 0, 2, 0], 10, true);
+
+	//this.legsSprite.animations.add('normalLegsLeft', [1, 0, 2, 0], 10, true);
+	//this.legsSprite.animations.add('normalLegsRight', [1, 0, 2, 0], 10, true);
+	//this.legsSprite.animations.add('normalLegsUp', [1, 0, 2, 0], 10, true);
+	//this.legsSprite.animations.add('normalLegsDown', [1, 0, 2, 0], 10, true);
+
 	this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
-	this.headSprite.animations.add('normalHeadRight', [1], 10, true);
-	this.headSprite.animations.add('normalHeadUp', [2], 10, true);
-	this.headSprite.animations.add('normalHeadDown', [3], 10, true);
+	this.headSprite.animations.add('normalHeadRight', [0], 10, true);
+	this.headSprite.animations.add('normalHeadUp', [0], 10, true);
+	this.headSprite.animations.add('normalHeadDown', [0], 10, true);
 
-	this.torsoSprite.animations.add('normalTorsoLeft', [1, 0, 2, 0], 10, true);
-	this.torsoSprite.animations.add('normalTorsoRight', [1, 0, 2, 0], 10, true);
-	this.torsoSprite.animations.add('normalTorsoUp', [1, 0, 2, 0], 10, true);
-	this.torsoSprite.animations.add('normalTorsoDown', [1, 0, 2, 0], 10, true);
+	this.torsoSprite.animations.add('normalTorsoLeft', [0], 10, true);
+	this.torsoSprite.animations.add('normalTorsoRight', [0], 10, true);
+	this.torsoSprite.animations.add('normalTorsoUp', [0], 10, true);
+	this.torsoSprite.animations.add('normalTorsoDown', [0], 10, true);
 
-	this.legsSprite.animations.add('normalLegsLeft', [1, 0, 2, 0], 10, true);
-	this.legsSprite.animations.add('normalLegsRight', [1, 0, 2, 0], 10, true);
-	this.legsSprite.animations.add('normalLegsUp', [1, 0, 2, 0], 10, true);
-	this.legsSprite.animations.add('normalLegsDown', [1, 0, 2, 0], 10, true);
+	this.legsSprite.animations.add('normalLegsLeft', [0], 10, true);
+	this.legsSprite.animations.add('normalLegsRight', [0], 10, true);
+	this.legsSprite.animations.add('normalLegsUp', [0], 10, true);
+	this.legsSprite.animations.add('normalLegsDown', [0], 10, true);
 
 	this.colliderSprite.anchor.setTo(0.5, 0.5);
 	this.colliderSprite.x = this.headSprite.x + this.headSprite.width / 2;
