@@ -9,17 +9,17 @@ function BasicEnemyX(game, health, x, y, range, speed, direction, damage) {
 	this.direction = direction; //0=left; 1=right
 	this.damage = damage;
 	this.sprite = null;
-	this.spriteName = 'basicEnemy';
+	this.spriteName = 'ghost';
 }
 
 BasicEnemyX.prototype.render = function() {
-	this.sprite = this.game.add.sprite(this.x, this.y, 'enemy1');
+	this.sprite = this.game.add.sprite(this.x, this.y, this.spriteName);
 	this.sprite.playerDamage = this.damage;
 
 	this.game.physics.arcade.enable(this.sprite);
 	this.sprite.body.immovable = true;
 
-	this.sprite.animations.add('move', [0, 1], 10, true);
+	this.sprite.animations.add('move', [0, 1, 2], 10, true);
 
 	if (this.direction) {
 		this.moveRight();
@@ -61,17 +61,17 @@ function BasicEnemyY(game, health, x, y, range, speed, direction, damage) {
 	this.direction = direction; //0=up; 1=down
 	this.damage = damage;
 	this.sprite = null;
-	this.spriteName = 'basicEnemy';
+	this.spriteName = 'bat';
 }
 
 BasicEnemyY.prototype.render = function() {
-	this.sprite = this.game.add.sprite(this.x, this.y, 'enemy1');
+	this.sprite = this.game.add.sprite(this.x, this.y, this.spriteName);
 	this.sprite.playerDamage = this.damage;
 
 	this.game.physics.arcade.enable(this.sprite);
 	this.sprite.body.immovable = true;
 
-	this.sprite.animations.add('move', [0, 1], 10, true);
+	this.sprite.animations.add('move', [0, 1, 2], 10, true);
 
 	if (this.direction) {
 		this.moveDown();

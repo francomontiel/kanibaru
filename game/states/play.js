@@ -26,8 +26,12 @@ States.Play.prototype = {
 		enemy = new BasicEnemyY(game, 50, 600, 300, 100, 100, 0, 10);
 		enemy.render();
 		this.game.enemies.push(enemy);
+
+		this.game.redSplash = this.game.add.sprite(0, 0, 'redSplash');
+		this.game.redSplash.alpha = 0;
 	},
 	update: function(){
+		this.game.redSplash.alpha = 0;
 		this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
 		this.game.enemies.forEach(this.checkPlayerEnemyCollision);
 
@@ -37,5 +41,5 @@ States.Play.prototype = {
 };
 
 States.Play.prototype.checkPlayerEnemyCollision = function(element, index, array) {
-	this.game.physics.arcade.collide(this.game.Duke.colliderSprite, element.sprite, this.game.Duke.handleEnemyCollision, null, this);
+	this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, element.sprite, this.game.Duke.handleEnemyCollision, null, this);
 }

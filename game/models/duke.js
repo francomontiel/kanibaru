@@ -8,18 +8,30 @@ function Duke(game){
 	this.torso = 'normalTorso';
 	this.legs = 'normalLegs';
 	this.speed = 150;
-	this.facing = 0; //Left-Right-Up-Down
+	this.facing = 0; //Left=0; Right=1; Up=2; Down=3
 	this.sprite = null;
 	this.timeDamaged = 0;
 }
 
 Duke.prototype.update = function(){
+	if (this.game.Duke.health <= 0) {
+		this.game.Duke.headSprite.kill();
+		this.game.Duke.torsoSprite.kill();
+		this.game.Duke.legsSprite.kill();
+		this.game.Duke.colliderSprite.kill();
+	}
+
 	this.game.Duke.colliderSprite.body.velocity.y = 0;
 	this.game.Duke.colliderSprite.body.velocity.x = 0;
 
 	this.handleKeyDown();
 
 	this.game.Duke.timeDamaged--;
+	if (this.game.Duke.timeDamaged > 40) {
+		this.game.redSplash.alpha = 0.2;
+	} else {
+		this.game.redSplash.alpha = 0;
+	}
 };
 
 Duke.prototype.handleKeyDown = function() {
@@ -111,6 +123,8 @@ Duke.prototype.render = function(){
 	this.torsoSprite = this.game.add.sprite(0, 0, this.torso);
 	this.legsSprite = this.game.add.sprite(0, 0, this.legs);
 
+	this.colliderSprite.alpha = 0;
+
 	this.game.physics.arcade.enable(this.colliderSprite);
 	this.game.physics.arcade.enable(this.headSprite);
 	this.game.physics.arcade.enable(this.torsoSprite);
@@ -136,7 +150,7 @@ Duke.prototype.render = function(){
 	this.colliderSprite.anchor.setTo(0.5, 0.5);
 	this.colliderSprite.x = this.headSprite.x + this.headSprite.width / 2;
 	this.colliderSprite.y = this.headSprite.y + this.headSprite.height / 2;
-	this.colliderSprite.angle = 135;
+	//this.colliderSprite.angle = 135;
 };
 
 Duke.prototype.changeHead = function(newHead){
@@ -161,6 +175,6 @@ Duke.prototype.handleEnemyCollision = function(duke, enemy){
 	if (this.game.Duke.timeDamaged <= 0 && this.game.Duke.health > 0) {
 		this.game.Duke.health -= enemy.playerDamage;
 		console.log(this.game.Duke.health);
-		this.game.Duke.timeDamaged = 100;
+		this.game.Duke.timeDamaged = 50;
 	}
 }
