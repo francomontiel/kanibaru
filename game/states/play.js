@@ -20,19 +20,8 @@ States.Play.prototype = {
 		obstacle.body.immovable = true;
 	},
 	update: function(){
-		this.game.Duke.collided = 0;
-		this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles, this.checkPlayerObstaclesCollision, null, this);
+		this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
 		this.game.Duke.update();
 		
 	}
 };
-
-States.Play.prototype.checkPlayerObstaclesCollision = function() {
-		this.game.Duke.headSprite.body.velocity.y = 0;
-		this.game.Duke.torsoSprite.body.velocity.y = 0;
-		this.game.Duke.legsSprite.body.velocity.y = 0;
-		this.game.Duke.headSprite.body.velocity.x = 0;
-		this.game.Duke.torsoSprite.body.velocity.x = 0;
-		this.game.Duke.legsSprite.body.velocity.x = 0;
-		this.game.Duke.collided = 1;
-	}
