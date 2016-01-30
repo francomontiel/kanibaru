@@ -27,7 +27,7 @@ States.Play.prototype = {
 	}
 };
 
-States.Play.prototype.checkPlayerObstaclesCollision = function(duke, obstacle) {
+States.Play.prototype.checkPlayerObstaclesCollision = function() {
 		this.game.Duke.headSprite.body.velocity.y = 0;
 		this.game.Duke.torsoSprite.body.velocity.y = 0;
 		this.game.Duke.legsSprite.body.velocity.y = 0;
