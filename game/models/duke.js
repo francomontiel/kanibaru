@@ -10,20 +10,16 @@ function Duke(game){
 	this.speed = 150;
 	this.facing = 0; //Left-Right-Up-Down
 	this.sprite = null;
+	this.timeDamaged = 0;
 }
 
 Duke.prototype.update = function(){
-	this.game.Duke.headSprite.body.velocity.y = 0;
-	this.game.Duke.torsoSprite.body.velocity.y = 0;
-	this.game.Duke.legsSprite.body.velocity.y = 0;
-	this.game.Duke.headSprite.body.velocity.x = 0;
-	this.game.Duke.torsoSprite.body.velocity.x = 0;
-	this.game.Duke.legsSprite.body.velocity.x = 0;
-
 	this.game.Duke.colliderSprite.body.velocity.y = 0;
 	this.game.Duke.colliderSprite.body.velocity.x = 0;
 
 	this.handleKeyDown();
+
+	this.game.Duke.timeDamaged--;
 };
 
 Duke.prototype.handleKeyDown = function() {
@@ -160,3 +156,11 @@ Duke.prototype.changeLegs = function(newLegs){
 	this.legsSprite.kill();
 	this.legsSprite = this.game.add.sprite(150, 150, newLegs);	
 };
+
+Duke.prototype.handleEnemyCollision = function(duke, enemy){
+	if (this.game.Duke.timeDamaged <= 0 && this.game.Duke.health > 0) {
+		this.game.Duke.health -= enemy.playerDamage;
+		console.log(this.game.Duke.health);
+		this.game.Duke.timeDamaged = 100;
+	}
+}
