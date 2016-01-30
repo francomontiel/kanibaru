@@ -16,6 +16,8 @@ States.Boot.prototype = {
 		this.game.load = this.game.load.spritesheet('dukeCollider', 'assets/images/duke/collider.png');
 
 		this.game.load = this.game.load.image('obstacle', 'assets/images/terrain/obstacle.png');
+
+		this.game.load = this.game.load.spritesheet('enemy1', 'assets/images/enemies/enemy1.png', 100, 100);
 	},
 	create: function(){
 		this.state.start('Play');

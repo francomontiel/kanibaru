@@ -18,12 +18,15 @@ States.Play.prototype = {
 
 		var obstacle = this.game.obstacles.create(300, 200, 'obstacle');
 		obstacle.body.immovable = true;
+
+		this.game.enemy = new BasicEnemyX(game, 50, 400, 400, 100, 100, 0);
+		this.game.enemy.render();
 	},
 	update: function(){
 		this.game.Duke.collided = 0;
 		this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles, this.checkPlayerObstaclesCollision, null, this);
 		this.game.Duke.update();
-		
+		this.game.enemy.update();
 	}
 };
 
