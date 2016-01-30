@@ -4,8 +4,10 @@ Game = {
   States: States
 };
 
-window.game = game = new Phaser.Game(490, 290, Phaser.AUTO, '');
+window.game = game = new Phaser.Game(900, 650, Phaser.AUTO, '');
 
 game.state.add('Boot', Game.States.Boot);
+
+game.state.add('Play', Game.States.Play);
 
 game.state.start('Boot');
