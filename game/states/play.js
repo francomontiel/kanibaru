@@ -9,6 +9,8 @@ States.Play.prototype = {
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
 		this.game.cursors = game.input.keyboard.createCursorKeys();
+
+		this.physics.startSystem(Phaser.Physics.ARCADE);
 	},
 	update: function(){
 		this.game.Duke.update();
