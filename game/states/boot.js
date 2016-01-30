@@ -14,6 +14,8 @@ States.Boot.prototype = {
 		this.game.load = this.game.load.spritesheet('normalTorso', 'assets/images/duke/normalTorsoSheet.png', 110, 110);
 		this.game.load = this.game.load.spritesheet('normalLegs', 'assets/images/duke/normalLegsSheet.png', 110, 110);
 		this.game.load = this.game.load.spritesheet('dukeCollider', 'assets/images/duke/collider.png');
+
+		this.game.load = this.game.load.image('obstacle', 'assets/images/terrain/obstacle.png');
 	},
 	create: function(){
 		this.state.start('Play');
