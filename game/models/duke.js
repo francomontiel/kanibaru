@@ -9,6 +9,7 @@ function Duke(game){
 	this.legs = 'normalLegs';
 	this.speed = 150;
 	this.facing = 0; //Left-Right-Up-Down
+	this.collided = 0;
 	this.sprite = null;
 }
 
@@ -23,7 +24,9 @@ Duke.prototype.update = function(){
 	this.game.Duke.colliderSprite.body.velocity.y = 0;
 	this.game.Duke.colliderSprite.body.velocity.x = 0;
 
-	this.handleKeyDown();
+	if (!this.game.Duke.collided) {
+		this.handleKeyDown();
+	}
 };
 
 Duke.prototype.handleKeyDown = function() {
@@ -113,6 +116,8 @@ Duke.prototype.render = function(){
 	this.game.physics.arcade.enable(this.torsoSprite);
 	this.game.physics.arcade.enable(this.legsSprite);
 
+	this.colliderSprite.immovable = true;
+
 	this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
 	this.headSprite.animations.add('normalHeadRight', [1], 10, true);
 	this.headSprite.animations.add('normalHeadUp', [2], 10, true);
@@ -122,7 +127,7 @@ Duke.prototype.render = function(){
 	this.torsoSprite.animations.add('normalTorsoRight', [1, 0, 2, 0], 10, true);
 	this.torsoSprite.animations.add('normalTorsoUp', [1, 0, 2, 0], 10, true);
 	this.torsoSprite.animations.add('normalTorsoDown', [1, 0, 2, 0], 10, true);
-	
+
 	this.legsSprite.animations.add('normalLegsLeft', [1, 0, 2, 0], 10, true);
 	this.legsSprite.animations.add('normalLegsRight', [1, 0, 2, 0], 10, true);
 	this.legsSprite.animations.add('normalLegsUp', [1, 0, 2, 0], 10, true);
@@ -151,3 +156,12 @@ Duke.prototype.changeLegs = function(newLegs){
 	this.legsSprite.kill();
 	this.legsSprite = this.game.add.sprite(150, 150, newLegs);	
 };
+
+/*Duke.prototype.checkObstaclesCollision = function() {
+	this.game.Duke.headSprite.body.velocity.y = 0;
+	this.game.Duke.torsoSprite.body.velocity.y = 0;
+	this.game.Duke.legsSprite.body.velocity.y = 0;
+	this.game.Duke.headSprite.body.velocity.x = 0;
+	this.game.Duke.torsoSprite.body.velocity.x = 0;
+	this.game.Duke.legsSprite.body.velocity.x = 0;
+}*/
