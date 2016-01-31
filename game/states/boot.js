@@ -34,6 +34,9 @@ States.Boot.prototype = {
 		this.game.load = this.game.load.image('bulletStone1', 'assets/images/bullets/stone1.png');
 		this.game.load = this.game.load.image('bulletFireStone1', 'assets/images/bullets/firestone1.png');
 
+		this.game.load = this.game.load.image('sling', 'assets/images/items/sling.png');
+
+		this.game.load = this.game.load.image('cutscene1', 'assets/images/cutscenes/1.png');
 
 		this.game.load = this.game.load.audio('chiruchiru', 'assets/sounds/music/Chiru8bit.wav');
 	},
