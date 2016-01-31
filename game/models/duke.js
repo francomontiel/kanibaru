@@ -126,12 +126,12 @@ Duke.prototype.handleKeyDown = function() {
 		}
 	}
 
-	if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+	if (this.game.Duke.currentWeapon > -1 && this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
 		this.chargeTime++;
 	}
 
-	this.headSprite.x = this.colliderSprite.x - this.headSprite.width / 2;
-	this.headSprite.y = this.colliderSprite.y - this.headSprite.height / 2;
+	this.headSprite.x = this.colliderSprite.x - this.headSprite.width * 2 / 5;
+	this.headSprite.y = this.colliderSprite.y - this.headSprite.height * 2 / 5;
 	this.torsoSprite.x = this.headSprite.x;
 	this.torsoSprite.y = this.headSprite.y;
 	this.legsSprite.x = this.headSprite.x;

@@ -30,6 +30,10 @@ States.Terminal.prototype = {
 		//El taxi
 		this.createObstacle(1049, 21, 103, 115);
 
+		this.game.collectibles = this.game.add.group();
+		this.game.collectibles.enableBody = true;
+		this.game.collectibles.add(new Collectible(game, 650, 800, 0, 0, 0, 'sling'));
+
 		this.game.enemies = [];
 		var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
 		//var enemy = new ShootingEnemy(game, 50, 195, 406 ,0);
@@ -49,6 +53,7 @@ States.Terminal.prototype = {
 		this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
 		this.game.enemies.forEach(this.checkPlayerEnemyCollision);
 		this.game.enemies.forEach(this.checkEnemyObstacleCollision);
+		this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
 
 		this.game.Duke.update();
 		this.game.enemies.forEach(function(element, index, array) {element.update()});
@@ -69,3 +74,15 @@ States.Terminal.prototype.createObstacle = function(x, y, width, height) {
 	this.game.obstacles.add(obstacle);
 	obstacle.body.immovable = true;
 }
+
+States.Terminal.prototype.handleItemCollision = function (duke, item) {
+
+    this.game.Duke.health += item.health;
+    this.game.Duke.speed += item.speed;
+
+    if (item.weapon > -1) {
+    	this.game.Duke.changeWeapon(item.weapon);
+    }
+
+    item.kill();
+};
