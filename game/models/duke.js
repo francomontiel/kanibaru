@@ -30,6 +30,8 @@ Duke.prototype.update = function(){
 
 	this.handleKeyDown();
 	//this.handleKeyUp();
+	this.game.physics.arcade.collide(this.game.Duke.weapons[this.game.Duke.currentWeapon], this.game.obstacles, this.handleBulletObstacleCollision, null, this);
+	this.game.enemies.forEach(this.handleBulletEnemyCollision);
 
 	this.game.Duke.timeDamaged--;
 	if (this.game.Duke.timeDamaged > 40) {
@@ -136,8 +138,8 @@ Duke.prototype.handleKeyDown = function() {
 
 Duke.prototype.handleKeyUp = function(e) {
 	if (e.keyCode == Phaser.Keyboard.SPACEBAR) {
-		var dangle = 25 - Math.min(25, this.game.Duke.chargeTime / 8);
-		var dspeed = Math.min(300, this.game.Duke.chargeTime * 5);
+		var dangle = 10 - Math.min(15, this.game.Duke.chargeTime / 3);
+		var dspeed = Math.min(300, this.game.Duke.chargeTime * 10);
 		this.game.Duke.chargeTime++;
 		this.game.Duke.weapons[this.game.Duke.currentWeapon].fire(this.game.Duke.colliderSprite, this.game.Duke.facing, dangle, dspeed);
 		this.game.Duke.chargeTime = 0;
@@ -252,4 +254,17 @@ Duke.prototype.changeWeapon = function(weapon) {
 
 	this.currentWeapon = weapon;
 	this.weapon[this.currentWeapon].visible = true;
+}
+
+Duke.prototype.handleBulletObstacleCollision = function(bullet, obstacle) {
+	//bullet.kill();
+}
+
+Duke.prototype.handleBulletEnemyCollision = function(element, index, array) {
+	this.game.physics.arcade.collide(element.sprite, this.game.Duke.weapons[this.game.Duke.currentWeapon], this.game.Duke.hurtEnemy, null, this);
+}
+
+Duke.prototype.hurtEnemy = function(enemy, bullet) {
+	enemy.health -= bullet.damage;
+	//bullet.kill();
 }

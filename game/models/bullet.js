@@ -48,6 +48,9 @@ Bullet.prototype.update = function () {
         this.scale.x += this.scaleSpeed;
         this.scale.y += this.scaleSpeed;
     }
+    if (Math.abs(this.body.velocity.y) + Math.abs(this.body.velocity.x) < 5) {
+        this.kill();
+    }
 
 };
 
@@ -63,7 +66,7 @@ Weapon.BlueBullet = function (game) {
 
     for (var i = 0; i < 64; i++)
     {
-        this.add(new Bullet(game, 'bullet1', 15), true);
+        this.add(new Bullet(game, 'bullet1', 5), true);
     }
 
     return this;
@@ -95,7 +98,10 @@ Weapon.StoneBullet = function (game) {
 
     for (var i = 0; i < 64; i++)
     {
-        this.add(new Bullet(game, 'bulletStone1', 10), true);
+        this.add(new Bullet(game, 'bulletStone1', 15), true);
+        this.getChildAt(i).body.bounce.setTo(0.2, 0.2);
+        this.getChildAt(i).body.drag.x = 20;
+        this.getChildAt(i).body.drag.y = 20;
     }
 
     return this;
@@ -117,19 +123,19 @@ Weapon.StoneBullet.prototype.fire = function (source, facing, dangle, dspeed) {
     switch (facing) {
         case 0:
             angle = 180 + dangle;
-            gy = 50;
+            //gy = 50;
             break;
         case 1:
             angle = 0 + dangle;
-            gy = -50;
+            //gy = -50;
             break;
         case 2:
             angle = 270 + dangle;
-            gx = -50
+            //gx = -50
             break;
         case 3:
             angle = 90 + dangle;
-            gx = 50;
+            //gx = 50;
             break;
         default:
     }
@@ -149,7 +155,10 @@ Weapon.FirestoneBullet = function (game) {
 
     for (var i = 0; i < 64; i++)
     {
-        this.add(new Bullet(game, 'bulletFireStone1', 10), true);
+        this.add(new Bullet(game, 'bulletFireStone1', 35), true);
+        this.getChildAt(i).body.bounce.setTo(0.1, 0.1);
+        this.getChildAt(i).body.drag.x = 30;
+        this.getChildAt(i).body.drag.y = 30;
     }
 
     return this;
@@ -159,30 +168,36 @@ Weapon.FirestoneBullet = function (game) {
 Weapon.FirestoneBullet.prototype = Object.create(Phaser.Group.prototype);
 Weapon.FirestoneBullet.prototype.constructor = Weapon.FirestoneBullet;
 
-Weapon.FirestoneBullet.prototype.fire = function (source, facing) {
+Weapon.FirestoneBullet.prototype.fire = function (source, facing, dangle, dspeed) {
 
     if (this.game.time.time < this.nextFire) { return; }
 
     var x = source.x;// + 10;
     var y = source.y;// + 10;
-    var angle;
+    var angle = 0;
+    var gx = 0;
+    var gy = 0;
     switch (facing) {
         case 0:
-            angle = 180;
+            angle = 180 + dangle;
+            //gy = 50;
             break;
         case 1:
-            angle = 0;
+            angle = 0 + dangle;
+            //gy = -50;
             break;
         case 2:
-            angle = 270;
+            angle = 270 + dangle;
+            //gx = -50
             break;
         case 3:
-            angle = 90;
+            angle = 90 + dangle;
+            //gx = 50;
             break;
         default:
     }
 
-    this.getFirstExists(false).fire(x, y, angle, this.bulletSpeed, 0, 0);
+    this.getFirstExists(false).fire(x, y, angle, this.bulletSpeed + dspeed, gx, gy);
 
     this.nextFire = this.game.time.time + this.fireRate;
 };

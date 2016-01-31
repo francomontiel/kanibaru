@@ -32,6 +32,7 @@ States.Terminal.prototype = {
 
 		this.game.enemies = [];
 		var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
+		//var enemy = new ShootingEnemy(game, 50, 195, 406 ,0);
 		enemy.render();
 		this.game.enemies.push(enemy);
 

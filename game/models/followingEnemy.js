@@ -20,6 +20,7 @@ function FollowingEnemy(game, health, x, y, wSpeed, rSpeed, facing, damage) {
 FollowingEnemy.prototype.render = function() {
 	this.sprite = this.game.add.sprite(this.x, this.y, this.spriteName);
 	this.sprite.playerDamage = this.damage;
+	this.sprite.health = this.health;
 
 	this.game.physics.arcade.enable(this.sprite);
 	this.sprite.body.immovable = true;
@@ -31,7 +32,7 @@ FollowingEnemy.prototype.render = function() {
 
 FollowingEnemy.prototype.update = function() {
 	this.look();
-	if (this.health <= 0) {
+	if (this.sprite.health <= 0) {
 		this.sprite.kill();
 	}
 }

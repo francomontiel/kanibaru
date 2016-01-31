@@ -15,6 +15,7 @@ function BasicEnemyX(game, health, x, y, range, speed, direction, damage) {
 BasicEnemyX.prototype.render = function() {
 	this.sprite = this.game.add.sprite(this.x, this.y, this.spriteName);
 	this.sprite.playerDamage = this.damage;
+	this.sprite.health = this.health;
 
 	this.game.physics.arcade.enable(this.sprite);
 	this.sprite.body.immovable = true;
@@ -30,7 +31,7 @@ BasicEnemyX.prototype.render = function() {
 }
 
 BasicEnemyX.prototype.update = function() {
-	if (this.health <= 0) {
+	if (this.sprite.health <= 0) {
 		this.sprite.kill();
 	}
 	if (this.sprite.x <= this.limitL) {
@@ -67,6 +68,7 @@ function BasicEnemyY(game, health, x, y, range, speed, direction, damage) {
 BasicEnemyY.prototype.render = function() {
 	this.sprite = this.game.add.sprite(this.x, this.y, this.spriteName);
 	this.sprite.playerDamage = this.damage;
+	this.sprite.health = this.health;
 
 	this.game.physics.arcade.enable(this.sprite);
 	this.sprite.body.immovable = true;
@@ -82,7 +84,7 @@ BasicEnemyY.prototype.render = function() {
 }
 
 BasicEnemyY.prototype.update = function() {
-	if (this.health <= 0) {
+	if (this.sprite.health <= 0) {
 		this.sprite.kill();
 	}
 	if (this.sprite.y <= this.limitU) {
