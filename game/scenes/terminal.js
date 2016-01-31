@@ -27,7 +27,7 @@ States.Terminal.prototype = {
 		this.createObstacle(442, 581, 127, 237);
 		this.createObstacle(442, 936, 127, 247);
 
-		//El taxi
+		//me lo paro "El taxi" me lo paroo
 		this.createObstacle(1049, 21, 103, 115);
 
 		this.game.collectibles = this.game.add.group();
