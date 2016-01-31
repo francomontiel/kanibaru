@@ -12,6 +12,7 @@ States.Mine.prototype = {
 
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
+		this.game.Duke.changeWeapon(0);
 		this.game.Duke.reset(30, 909, 100);
 		
 		this.game.cursors = game.input.keyboard.createCursorKeys();
@@ -38,10 +39,44 @@ States.Mine.prototype = {
 		this.game.collectibles.add(new Collectible(game, 767, 171, 0, 0, -1, 'sword'));
 
 		this.game.enemies = [];
-		//var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
-		//var enemy = new ShootingEnemy(game, 50, 195, 406 ,0);
-		//enemy.render();
-		//this.game.enemies.push(enemy);
+		enemy = new ShootingEnemy(game, 50, 600, 480, 1);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new ShootingEnemy(game, 50, 740, 480, 1);
+		enemy.render();
+		this.game.enemies.push(enemy);
+
+		var enemy = new FollowingEnemy(game, 100, 1150, 650, 50, 200, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		var enemy = new FollowingEnemy(game, 200, 1050, 650, 50, 300, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+
+		enemy = new BasicEnemyY(game, 75, 130, 910, 150, 150, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 75, 220, 910, 150, 300, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 75, 340, 910, 150, 250, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 75, 490, 910, 150, 150, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+
+		enemy = new BasicEnemyX(game, 100, 910, 170, 300, 300, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyX(game, 100, 910, 250, 300, 200, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+
+		this.game.tio = new TioSupay(game, 350, 550, 750, 100, 2)
+		this.game.tio.render();
+		this.game.enemies.push(this.game.tio);
+		this.game.tio.sprite.visible = false;
 
 		this.game.redSplash = this.game.add.sprite(0, 0, 'redSplash');
 		this.game.redSplash.alpha = 0;
@@ -63,7 +98,7 @@ States.Mine.prototype = {
 			this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
 			this.game.enemies.forEach(this.checkPlayerEnemyCollision);
 			this.game.enemies.forEach(this.checkEnemyObstacleCollision);
-			//this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
+			this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
 
 			this.game.Duke.update();
 			this.game.enemies.forEach(function(element, index, array) {element.update()});
@@ -101,6 +136,8 @@ States.Mine.prototype.handleItemCollision = function (duke, item) {
     }
 
     item.kill();
+    this.game.tio.sprite.visible = true;
+    this.game.tio.weapon.visible = true;
 };
 
 /*States.Terminal.prototype.nextScene = function(duke, taxi) {

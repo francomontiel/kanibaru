@@ -94,7 +94,7 @@ States.Sajama.prototype.handleItemCollision = function (duke, item) {
     }
 
     item.kill();
-    //this.nextScene();
+    this.nextScene();
 };
 
 States.Sajama.prototype.nextScene = function(duke, taxi) {

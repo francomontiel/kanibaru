@@ -12,6 +12,7 @@ States.Oruro2.prototype = {
 
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
+		this.game.Duke.changeWeapon(0);
 		this.game.Duke.reset(1865, 87, 100);
 		
 		this.game.cursors = game.input.keyboard.createCursorKeys();
@@ -44,10 +45,43 @@ States.Oruro2.prototype = {
 		//this.game.collectibles.add(new Collectible(game, 650, 800, 0, 0, 0, 'sling'));
 
 		this.game.enemies = [];
-		//var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
-		//var enemy = new ShootingEnemy(game, 50, 195, 406 ,0);
-		//enemy.render();
-		//this.game.enemies.push(enemy);
+		var enemy = new FollowingEnemy(game, 50, 150, 1450, 50, 200, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		var enemy = new FollowingEnemy(game, 50, 350, 1050, 50, 100, 0, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyX(game, 50, 1350, 750, 100, 100, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 50, 1500, 880, 100, 100, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 50, 660, 140, 100, 150, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 50, 460, 1450, 100, 150, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyX(game, 50, 1930, 350, 100, 100, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyX(game, 50, 260, 1400, 200, 300, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyX(game, 50, 350, 1200, 150, 200, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 50, 1900, 620, 100, 50, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new ShootingEnemy(game, 50, 800, 390, 1);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new ShootingEnemy(game, 50, 1050, 300, 2);
+		enemy.render();
+		this.game.enemies.push(enemy);
+
 
 		this.game.redSplash = this.game.add.sprite(0, 0, 'redSplash');
 		this.game.redSplash.alpha = 0;

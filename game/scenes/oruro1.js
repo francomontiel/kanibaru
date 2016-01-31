@@ -44,10 +44,16 @@ States.Oruro1.prototype = {
 		//this.game.collectibles.add(new Collectible(game, 650, 800, 0, 0, 0, 'sling'));
 
 		this.game.enemies = [];
-		//var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
-		//var enemy = new ShootingEnemy(game, 50, 195, 406 ,0);
-		//enemy.render();
-		//this.game.enemies.push(enemy);
+		var enemy = new FollowingEnemy(game, 50, 150, 1250, 50, 100, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyX(game, 50, 1350, 750, 100, 50, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 50, 1500, 880, 100, 50, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+
 
 		this.game.redSplash = this.game.add.sprite(0, 0, 'redSplash');
 		this.game.redSplash.alpha = 0;

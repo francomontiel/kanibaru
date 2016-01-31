@@ -12,6 +12,7 @@ States.CathedralOpen.prototype = {
 
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
+		this.game.Duke.changeWeapon(0);
 		this.game.Duke.reset(1567, 1317, 100);
 		
 		this.game.cursors = game.input.keyboard.createCursorKeys();
@@ -40,10 +41,34 @@ States.CathedralOpen.prototype = {
 		//this.game.collectibles.add(new Collectible(game, 650, 800, 0, 0, 0, 'sling'));
 
 		this.game.enemies = [];
-		//var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
-		//var enemy = new ShootingEnemy(game, 50, 195, 406 ,0);
-		//enemy.render();
-		//this.game.enemies.push(enemy);
+		var enemy = new FollowingEnemy(game, 50, 1100, 680, 50, 100, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 50, 2000, 550, 100, 50, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 50, 2150, 600, 100, 50, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 50, 1850, 500, 100, 50, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+
+		enemy = new BasicEnemyY(game, 50, 830, 1300, 100, 150, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyY(game, 50, 1440, 1300, 100, 50, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyX(game, 50, 1180, 1270, 200, 50, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyX(game, 50, 1180, 1140, 200, 200, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
+		enemy = new BasicEnemyX(game, 50, 1180, 1380, 200, 150, 1, 5);
+		enemy.render();
+		this.game.enemies.push(enemy);
 
 		this.game.redSplash = this.game.add.sprite(0, 0, 'redSplash');
 		this.game.redSplash.alpha = 0;

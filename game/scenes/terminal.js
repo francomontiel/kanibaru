@@ -32,8 +32,8 @@ States.Terminal.prototype = {
 		this.game.taxi = this.createObstacle(1049, 21, 103, 115);
 
 		this.game.collectibles = this.game.add.group();
-		//this.game.collectibles.enableBody = true;
-		//this.game.collectibles.add(new Collectible(game, 650, 800, 0, 0, 0, 'sling'));
+		this.game.collectibles.enableBody = true;
+		this.game.collectibles.add(new Collectible(game, 900, 390, 0, 0, -1, 'cross'));
 
 		this.game.enemies = [];
 		var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);

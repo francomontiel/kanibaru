@@ -21,7 +21,7 @@ TioSupay.prototype.render = function() {
 	this.sprite.health = this.health;
 
 	this.weapon = new Weapon.Hellfire(this.game);
-	this.weapon.visible = true;
+	this.weapon.visible = false;
 
 	this.game.physics.arcade.enable(this.sprite);
 	this.sprite.body.immovable = true;
