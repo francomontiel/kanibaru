@@ -5,6 +5,7 @@ function Cutscene(game, time, image) {
 	this.imageName = image;
 	this.state = 0;
 	this.timer = 0;
+	this.game.changeScene = false;
 }
 
 Cutscene.prototype.render = function() {
@@ -37,6 +38,7 @@ Cutscene.prototype.update = function() {
 	} else if (this.state == 2) {
 		if (this.image.alpha <= 0) {
 			this.game.isWaiting = false;
+			this.game.changeScene = true;
 			this.image.alpha = 0;
 		} else {
 			this.image.alpha -= 0.05;
@@ -47,3 +49,4 @@ Cutscene.prototype.update = function() {
 Cutscene.prototype.skip = function () {
 	this.state = 2;
 }
+
