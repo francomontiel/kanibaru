@@ -24,7 +24,7 @@ States.Sajama.prototype = {
 		this.createObstacle(800, 374, 235, 198);
 
 		//me lo paro "El taxi" me lo paroo
-		this.game.taxi = this.createObstacle(593, 584, 59, 53);
+		//this.game.taxi = this.createObstacle(593, 584, 59, 53);
 
 		this.game.collectibles = this.game.add.group();
 		this.game.collectibles.enableBody = true;
@@ -56,7 +56,7 @@ States.Sajama.prototype = {
 			this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
 			this.game.enemies.forEach(this.checkPlayerEnemyCollision);
 			this.game.enemies.forEach(this.checkEnemyObstacleCollision);
-			//this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
+			this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
 
 			this.game.Duke.update();
 			this.game.enemies.forEach(function(element, index, array) {element.update()});
@@ -94,9 +94,11 @@ States.Sajama.prototype.handleItemCollision = function (duke, item) {
     }
 
     item.kill();
+    //this.nextScene();
 };
 
 States.Sajama.prototype.nextScene = function(duke, taxi) {
+	//globalDuke = this.game.Duke;
 	this.game.music.stop();
 	this.state.start('Oruro2');
 }

@@ -110,6 +110,8 @@ States.Oruro1.prototype.handleItemCollision = function (duke, item) {
 };
 
 States.Oruro1.prototype.nextScene = function(duke, taxi) {
+
+//	globalDuke = this.game.Duke;
 	this.game.music.stop();
 	this.state.start('Sajama');
 }
