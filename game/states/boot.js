@@ -12,7 +12,7 @@ States.Boot.prototype = {
 		//this.game.load = this.game.load.image('normalLegs', 'assets/images/duke/normalLegs.png');
 		this.game.load = this.game.load.image('redSplash', '/assets/images/red.png');
 
-		this.game.load = this.game.load.image('mapex', '/assets/images/terrain/mapex.png');
+		this.game.load = this.game.load.image('map1', '/assets/images/terrain/map1.png');
 
 		this.game.load = this.game.load.spritesheet('normalHead', 'assets/images/duke/normalHeadSheet.png', 110, 110);
 		this.game.load = this.game.load.spritesheet('normalTorso', 'assets/images/duke/normalTorsoSheet.png', 110, 110);
@@ -23,11 +23,18 @@ States.Boot.prototype = {
 		
 		this.game.load = this.game.load.spritesheet('dukeCollider', 'assets/images/duke/collider.png');
 
-		this.game.load = this.game.load.image('obstacle', 'assets/images/terrain/obstacle.png');
+		//this.game.load = this.game.load.image('obstacle', 'assets/images/terrain/obstacle.png');
+		this.game.load = this.game.load.image('obstacle', 'assets/images/obstacles/collider.png');
 
 		this.game.load = this.game.load.spritesheet('enemy1', 'assets/images/enemies/enemy1.png', 100, 100);
 		this.game.load = this.game.load.spritesheet('bat', 'assets/images/enemies/bat.png', 64, 64);
 		this.game.load = this.game.load.spritesheet('ghost', 'assets/images/enemies/ghost.png', 64, 64);
+
+		this.game.load = this.game.load.image('bullet1', 'assets/images/bullets/blue.png');
+
+
+
+		this.game.load = this.game.load.audio('chiruchiru', 'assets/sounds/music/Chiru8bit.wav');
 	},
 	create: function(){
 		this.state.start('Play');

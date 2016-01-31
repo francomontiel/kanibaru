@@ -190,7 +190,21 @@ Duke.prototype.changeLegs = function(newLegs){
 Duke.prototype.handleEnemyCollision = function(duke, enemy){
 	if (this.game.Duke.timeDamaged <= 0 && this.game.Duke.health > 0) {
 		this.game.Duke.health -= enemy.playerDamage;
-		console.log(this.game.Duke.health);
 		this.game.Duke.timeDamaged = 50;
 	}
+}
+
+Duke.prototype.handleBulletCollision = function(duke, bullet){
+	bullet.kill();
+	if (this.game.Duke.timeDamaged <= 0 && this.game.Duke.health > 0) {
+		this.game.Duke.health -= bullet.playerDamage;
+		this.game.Duke.timeDamaged = 50;
+		console.log(this.game.Duke.health);
+	}
+}
+
+Duke.prototype.reset = function(x, y, health) {
+	this.game.Duke.colliderSprite.x = x;
+	this.game.Duke.colliderSprite.y = y;
+	this.game.Duke.health = health;
 }
