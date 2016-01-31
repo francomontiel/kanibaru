@@ -155,9 +155,9 @@ Weapon.StoneBullet = function (game) {
 Weapon.StoneBullet.prototype = Object.create(Phaser.Group.prototype);
 Weapon.StoneBullet.prototype.constructor = Weapon.StoneBullet;
 
-Weapon.StoneBullet.prototype.fire = function (source, facing, dangle, dspeed) {
+Weapon.StoneBullet.prototype.fire = function (game, source, facing, dangle, dspeed) {
 
-    if (this.game.time.time < this.nextFire) { return; }
+    if (game.time.time < this.nextFire) { return; }
 
     var x = source.x;// + 10;
     var y = source.y;// + 10;

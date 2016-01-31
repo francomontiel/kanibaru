@@ -12,7 +12,7 @@ States.CathedralClosed.prototype = {
 
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
-		this.game.Duke.reset(1567, 1317, 1);
+		this.game.Duke.reset(1567, 1317, 100);
 		
 		this.game.cursors = game.input.keyboard.createCursorKeys();
 
@@ -29,7 +29,7 @@ States.CathedralClosed.prototype = {
 		this.createObstacle(516, 220, 33, 390);
 		this.createObstacle(337, 587, 91, 243);
 		this.createObstacle(0, 0, 225, 1429);
-		this.createObstacle(1803, 0, 397, 258);
+		this.createObstacle(1822, 0, 397, 258);
 		this.createObstacle(2093, 252, 107, 69);
 
 		//me lo paro "El taxi" me lo paroo
@@ -106,5 +106,7 @@ States.CathedralClosed.prototype.handleItemCollision = function (duke, item) {
 };
 
 States.CathedralClosed.prototype.nextScene = function(duke, taxi) {
+	//globalDuke = this.game.Duke;
+	this.game.music.stop();
 	this.state.start('Oruro1');
 }
