@@ -100,8 +100,8 @@ Weapon.StoneBullet = function (game) {
     {
         this.add(new Bullet(game, 'bulletStone1', 15), true);
         this.getChildAt(i).body.bounce.setTo(0.2, 0.2);
-        this.getChildAt(i).body.drag.x = 20;
-        this.getChildAt(i).body.drag.y = 20;
+        this.getChildAt(i).body.drag.x = 30;
+        this.getChildAt(i).body.drag.y = 30;
     }
 
     return this;
@@ -157,8 +157,8 @@ Weapon.FirestoneBullet = function (game) {
     {
         this.add(new Bullet(game, 'bulletFireStone1', 35), true);
         this.getChildAt(i).body.bounce.setTo(0.1, 0.1);
-        this.getChildAt(i).body.drag.x = 30;
-        this.getChildAt(i).body.drag.y = 30;
+        this.getChildAt(i).body.drag.x = 50;
+        this.getChildAt(i).body.drag.y = 50;
     }
 
     return this;
