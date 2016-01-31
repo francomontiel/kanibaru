@@ -25,11 +25,10 @@ States.Mine.prototype = {
 		this.createObstacle(850, 505, 53, 495);
 		this.createObstacle(895, 600, 121, 400);
 		this.createObstacle(1013, 745, 227, 255);
-		this.createObstacle(1153, 0, 87, 491);
-		this.createObstacle(561, 0, 595, 67);
+		this.createObstacle(1169, 0, 71, 493);
+		this.createObstacle(561, 0, 691, 67);
 		this.createObstacle(529, 47, 153, 255);
-		this.createObstacle(887, 65, 165, 159);
-
+		this.createObstacle(841, 100, 161, 89);
 
 		//me lo paro "El taxi" me lo paroo
 		//this.game.taxi = this.createObstacle();
