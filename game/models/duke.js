@@ -7,7 +7,7 @@ function Duke(game){
 	this.head = 'normalHead';
 	this.torso = 'normalTorso';
 	this.legs = 'normalLegs';
-	this.speed = 150;
+	this.speed = 500;
 	this.facing = 0; //Left=0; Right=1; Up=2; Down=3
 	this.sprite = null;
 	this.timeDamaged = 0;
@@ -143,7 +143,7 @@ Duke.prototype.handleKeyUp = function(e) {
 		var dangle = 10 - Math.min(15, this.game.Duke.chargeTime / 3);
 		var dspeed = Math.min(300, this.game.Duke.chargeTime * 10);
 		this.game.Duke.chargeTime++;
-		this.game.Duke.weapons[this.game.Duke.currentWeapon].fire(this.game.Duke.colliderSprite, this.game.Duke.facing, dangle, dspeed);
+		this.game.Duke.weapons[this.game.Duke.currentWeapon].fire(this.game, this.game.Duke.colliderSprite, this.game.Duke.facing, dangle, dspeed);
 		this.game.Duke.chargeTime = 0;
 	}
 }
@@ -268,3 +268,5 @@ Duke.prototype.hurtEnemy = function(enemy, bullet) {
 	enemy.health -= bullet.damage;
 	//bullet.kill();
 }
+
+var globalDuke;

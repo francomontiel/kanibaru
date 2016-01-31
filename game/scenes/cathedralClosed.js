@@ -12,7 +12,7 @@ States.CathedralClosed.prototype = {
 
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
-		this.game.Duke.reset(1567, 1317, 1);
+		this.game.Duke.reset(1567, 1317, 100);
 		
 		this.game.cursors = game.input.keyboard.createCursorKeys();
 
@@ -106,5 +106,6 @@ States.CathedralClosed.prototype.handleItemCollision = function (duke, item) {
 };
 
 States.CathedralClosed.prototype.nextScene = function(duke, taxi) {
+	globalDuke = this.game.Duke;
 	this.state.start('Oruro1');
 }

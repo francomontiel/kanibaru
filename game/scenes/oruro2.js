@@ -110,5 +110,6 @@ States.Oruro2.prototype.handleItemCollision = function (duke, item) {
 };
 
 States.Oruro2.prototype.nextScene = function(duke, taxi) {
+	globalDuke = this.game.Duke;
 	this.state.start('CathedralOpen');
 }
