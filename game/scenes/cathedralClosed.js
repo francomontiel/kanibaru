@@ -106,5 +106,6 @@ States.CathedralClosed.prototype.handleItemCollision = function (duke, item) {
 };
 
 States.CathedralClosed.prototype.nextScene = function(duke, taxi) {
+	this.game.music.stop();
 	this.state.start('Oruro1');
 }
