@@ -11,8 +11,9 @@ States.Terminal.prototype = {
 		this.game.world.setBounds(0, 0, 1500, 1199);
 
 		this.game.Duke = new Duke(this.game);
+		globalDuke = this.game.Duke;
 		this.game.Duke.render(this.game);
-		this.game.Duke.reset(595, 975, 1);
+		this.game.Duke.reset(595, 975, 100);
 		
 		this.game.cursors = game.input.keyboard.createCursorKeys();
 
@@ -106,6 +107,7 @@ States.Terminal.prototype.handleItemCollision = function (duke, item) {
 }*/
 
 States.Terminal.prototype.nextScene = function(duke, taxi) {
+	//globalDuke = this.game.Duke;
 	this.game.music.stop();
 	this.state.start('CathedralClosed');
 }
