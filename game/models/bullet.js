@@ -88,6 +88,50 @@ Weapon.BlueBullet.prototype.fire = function (source, facing) {
     this.nextFire = this.game.time.time + this.fireRate;
 };
 
+Weapon.Hellfire = function (game) {
+
+    Phaser.Group.call(this, game, game.world, 'Hellfire', false, true, Phaser.Physics.ARCADE);
+
+    this.nextFire = 0;
+    this.bulletSpeed = 500;
+    this.fireRate = 1000;
+
+    for (var i = 0; i < 64; i++)
+    {
+        this.add(new Bullet(game, 'hellfire', 20), true);
+    }
+
+    this.setAll('scaleSpeed', -0.05);
+
+    return this;
+
+};
+
+Weapon.Hellfire.prototype = Object.create(Phaser.Group.prototype);
+Weapon.Hellfire.prototype.constructor = Weapon.Hellfire;
+
+Weapon.Hellfire.prototype.fire = function (source, dangle) {
+
+    if (this.game.time.time < this.nextFire) { return; }
+
+    var x1 = source.x + source.width / 4;
+    var y1 = source.y + source.height * 3 / 4;
+
+    var x2 = source.x + source.width * 3 / 4;
+    var y2 = source.y + source.height * 3 / 4;
+
+    this.getFirstExists(false).fire(x2, y2, 30 + dangle, this.bulletSpeed, 50, 0);
+    this.getFirstExists(false).fire(x2, y2, 60 + dangle, this.bulletSpeed, -50, 0);
+    this.getFirstExists(false).fire(x2, y2, 330 + dangle, this.bulletSpeed, 0, 70);
+    this.getFirstExists(false).fire(x2, y2, 300 + dangle, this.bulletSpeed, 0, -70);
+    this.getFirstExists(false).fire(x1, y1, 210 + dangle, this.bulletSpeed, 40, 0);
+    this.getFirstExists(false).fire(x1, y1, 240 + dangle, this.bulletSpeed, -40, 0);
+    this.getFirstExists(false).fire(x1, y1, 150 + dangle, this.bulletSpeed, 0, 60);
+    this.getFirstExists(false).fire(x1, y1, 120 + dangle, this.bulletSpeed, 0, -60);
+
+    this.nextFire = this.game.time.time + this.fireRate;
+};
+
 Weapon.StoneBullet = function (game) {
 
     Phaser.Group.call(this, game, game.world, 'Stone Bullet', false, true, Phaser.Physics.ARCADE);

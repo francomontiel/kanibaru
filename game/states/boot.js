@@ -35,10 +35,12 @@ States.Boot.prototype = {
 		this.game.load = this.game.load.spritesheet('enemy1', 'assets/images/enemies/enemy1.png', 100, 100);
 		this.game.load = this.game.load.spritesheet('bat', 'assets/images/enemies/bat.png', 64, 64);
 		this.game.load = this.game.load.spritesheet('ghost', 'assets/images/enemies/ghost.png', 64, 64);
+		this.game.load = this.game.load.image('supay', 'assets/images/enemies/TioSupay.png');
 
 		this.game.load = this.game.load.image('bullet1', 'assets/images/bullets/blue.png');
 		this.game.load = this.game.load.image('bulletStone1', 'assets/images/bullets/stone1.png');
 		this.game.load = this.game.load.image('bulletFireStone1', 'assets/images/bullets/firestone1.png');
+		this.game.load = this.game.load.image('hellfire', 'assets/images/bullets/hellfire1.png');
 
 		this.game.load = this.game.load.image('sling', 'assets/images/items/sling.png');
 		this.game.load = this.game.load.image('tunica', 'assets/images/items/tunica.png');
