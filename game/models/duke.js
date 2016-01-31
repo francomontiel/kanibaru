@@ -4,9 +4,9 @@ function Duke(game){
 	this.headSprite = null;
 	this.torsoSprite = null;
 	this.legsSprite = null;
-	this.head = 'singleHead';
-	this.torso = 'singleTorso';
-	this.legs = 'singleLegs';
+	this.head = 'normalHead';
+	this.torso = 'normalTorso';
+	this.legs = 'normalLegs';
 	this.speed = 150;
 	this.facing = 0; //Left=0; Right=1; Up=2; Down=3
 	this.sprite = null;
@@ -58,7 +58,7 @@ Duke.prototype.handleKeyDown = function() {
 		this.torsoSprite.play('normalTorsoUp');
 		this.legsSprite.play('normalLegsUp');
 	}
-	if (this.game.cursors.down.isDown){
+	else if (this.game.cursors.down.isDown){
 		this.facing = 3;
 		this.isMoving = true;
 
@@ -71,7 +71,7 @@ Duke.prototype.handleKeyDown = function() {
 		this.torsoSprite.play('normalTorsoDown');
 		this.legsSprite.play('normalLegsDown');
 	}
-	if (this.game.cursors.left.isDown){
+	else if (this.game.cursors.left.isDown){
 		this.facing = 0;
 		this.isMoving = true;
 
@@ -84,7 +84,7 @@ Duke.prototype.handleKeyDown = function() {
 		this.torsoSprite.play('normalTorsoLeft');
 		this.legsSprite.play('normalLegsLeft');
 	}
-	if (this.game.cursors.right.isDown){
+	else if (this.game.cursors.right.isDown){
 		this.facing = 1;
 		this.isMoving = true;
 
@@ -96,21 +96,21 @@ Duke.prototype.handleKeyDown = function() {
 		this.headSprite.play('normalHeadRight');
 		this.torsoSprite.play('normalTorsoRight');
 		this.legsSprite.play('normalLegsRight');
-	} if (!this.isMoving) {
-		this.headSprite.animations.stop();
-		this.torsoSprite.animations.stop();
-		this.legsSprite.animations.stop();
-
+	} else if (!this.isMoving) {
+		// this.headSprite.animations.stop();
+		// this.torsoSprite.animations.stop();
+		// this.legsSprite.animations.stop();
+		//Left=0; Right=1; Up=2; Down=3
 		switch (this.facing) {
 			case 0:
 				this.headSprite.frame = 0;
-				this.torsoSprite.frame = 0;
-				this.legsSprite.frame = 0;
+				this.torsoSprite.frame = 9;
+				this.legsSprite.frame = 9;
 				break;
 			case 1:
 				this.headSprite.frame = 1;
-				this.torsoSprite.frame = 0;
-				this.legsSprite.frame = 0;
+				this.torsoSprite.frame = 3;
+				this.legsSprite.frame = 3;
 				break;
 			case 2:
 				this.headSprite.frame = 2;
@@ -119,8 +119,8 @@ Duke.prototype.handleKeyDown = function() {
 				break;
 			case 3:
 				this.headSprite.frame = 3;
-				this.torsoSprite.frame = 0;
-				this.legsSprite.frame = 0;
+				this.torsoSprite.frame = 6;
+				this.legsSprite.frame = 6;
 				break;
 			default:
 		}
@@ -164,35 +164,35 @@ Duke.prototype.render = function(){
 	this.colliderSprite.immovable = true;
 	this.colliderSprite.body.collideWorldBounds = true;
 
-	//this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
-	//this.headSprite.animations.add('normalHeadRight', [1], 10, true);
-	//this.headSprite.animations.add('normalHeadUp', [2], 10, true);
-	//this.headSprite.animations.add('normalHeadDown', [3], 10, true);
-
-	//this.torsoSprite.animations.add('normalTorsoLeft', [1, 0, 2, 0], 10, true);
-	//this.torsoSprite.animations.add('normalTorsoRight', [1, 0, 2, 0], 10, true);
-	//this.torsoSprite.animations.add('normalTorsoUp', [1, 0, 2, 0], 10, true);
-	//this.torsoSprite.animations.add('normalTorsoDown', [1, 0, 2, 0], 10, true);
-
-	//this.legsSprite.animations.add('normalLegsLeft', [1, 0, 2, 0], 10, true);
-	//this.legsSprite.animations.add('normalLegsRight', [1, 0, 2, 0], 10, true);
-	//this.legsSprite.animations.add('normalLegsUp', [1, 0, 2, 0], 10, true);
-	//this.legsSprite.animations.add('normalLegsDown', [1, 0, 2, 0], 10, true);
-
 	this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
-	this.headSprite.animations.add('normalHeadRight', [0], 10, true);
-	this.headSprite.animations.add('normalHeadUp', [0], 10, true);
-	this.headSprite.animations.add('normalHeadDown', [0], 10, true);
+	this.headSprite.animations.add('normalHeadRight', [1], 10, true);
+	this.headSprite.animations.add('normalHeadUp', [2], 10, true);
+	this.headSprite.animations.add('normalHeadDown', [3], 10, true);
 
-	this.torsoSprite.animations.add('normalTorsoLeft', [0], 10, true);
-	this.torsoSprite.animations.add('normalTorsoRight', [0], 10, true);
-	this.torsoSprite.animations.add('normalTorsoUp', [0], 10, true);
-	this.torsoSprite.animations.add('normalTorsoDown', [0], 10, true);
+	this.torsoSprite.animations.add('normalTorsoLeft', [9, 10, 9, 11], 10, true);
+	this.torsoSprite.animations.add('normalTorsoRight', [3, 4, 3, 5], 10, true);
+	this.torsoSprite.animations.add('normalTorsoUp', [0, 1, 0, 2], 10, true);
+	this.torsoSprite.animations.add('normalTorsoDown', [6, 7, 6, 8], 10, true);
 
-	this.legsSprite.animations.add('normalLegsLeft', [0], 10, true);
-	this.legsSprite.animations.add('normalLegsRight', [0], 10, true);
-	this.legsSprite.animations.add('normalLegsUp', [0], 10, true);
-	this.legsSprite.animations.add('normalLegsDown', [0], 10, true);
+	this.legsSprite.animations.add('normalLegsLeft', [9, 10, 9, 11], 10, true);
+	this.legsSprite.animations.add('normalLegsRight', [3, 4, 3, 5], 10, true);
+	this.legsSprite.animations.add('normalLegsUp', [0, 1, 0, 2], 10, true);
+	this.legsSprite.animations.add('normalLegsDown', [6, 7, 6, 8], 10, true);
+
+	// this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
+	// this.headSprite.animations.add('normalHeadRight', [0], 10, true);
+	// this.headSprite.animations.add('normalHeadUp', [0], 10, true);
+	// this.headSprite.animations.add('normalHeadDown', [0], 10, true);
+
+	// this.torsoSprite.animations.add('normalTorsoLeft', [0], 10, true);
+	// this.torsoSprite.animations.add('normalTorsoRight', [0], 10, true);
+	// this.torsoSprite.animations.add('normalTorsoUp', [0], 10, true);
+	// this.torsoSprite.animations.add('normalTorsoDown', [0], 10, true);
+
+	// this.legsSprite.animations.add('normalLegsLeft', [0], 10, true);
+	// this.legsSprite.animations.add('normalLegsRight', [0], 10, true);
+	// this.legsSprite.animations.add('normalLegsUp', [0], 10, true);
+	// this.legsSprite.animations.add('normalLegsDown', [0], 10, true);
 
 	this.colliderSprite.anchor.setTo(0.5, 0.5);
 	this.colliderSprite.x = this.headSprite.x + this.headSprite.width / 2;
