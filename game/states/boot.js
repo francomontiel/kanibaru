@@ -36,6 +36,8 @@ States.Boot.prototype = {
 
 		this.game.load = this.game.load.image('sling', 'assets/images/items/sling.png');
 
+		this.game.load = this.game.load.image('cutscene1', 'assets/images/cutscenes/1.png');
+
 		this.game.load = this.game.load.audio('chiruchiru', 'assets/sounds/music/Chiru8bit.wav');
 	},
 	create: function(){

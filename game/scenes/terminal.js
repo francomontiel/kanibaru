@@ -47,16 +47,25 @@ States.Terminal.prototype = {
 		this.game.music = this.game.add.audio('chiruchiru');
 		this.game.music.loop = true;
 		this.game.music.play();
+		this.game.waiting = false;
+
+		this.game.currentCutscene = new Cutscene(game, 1000, 'cutscene1');
+		this.game.currentCutscene.render();
+		this.game.currentCutscene.start();
 	},
 	update: function(){
-		this.game.redSplash.alpha = 0;
-		this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
-		this.game.enemies.forEach(this.checkPlayerEnemyCollision);
-		this.game.enemies.forEach(this.checkEnemyObstacleCollision);
-		this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
+		if (!this.game.waiting) {
+			this.game.redSplash.alpha = 0;
+			this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
+			this.game.enemies.forEach(this.checkPlayerEnemyCollision);
+			this.game.enemies.forEach(this.checkEnemyObstacleCollision);
+			this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
 
-		this.game.Duke.update();
-		this.game.enemies.forEach(function(element, index, array) {element.update()});
+			this.game.Duke.update();
+			this.game.enemies.forEach(function(element, index, array) {element.update()});
+		} else {
+			this.game.currentCutscene.update();
+		}
 	}
 };
 
