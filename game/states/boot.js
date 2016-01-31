@@ -58,6 +58,13 @@ States.Boot.prototype = {
 		this.game.load = this.game.load.audio('idilio', 'assets/sounds/music/idilio8bit.wav');
 		this.game.load = this.game.load.audio('sanjose', 'assets/sounds/music/sj8bit.wav');
 
+		this.game.load = this.game.load.audio('step', 'assets/sounds/effects/concrete-step.wav');
+		this.game.load = this.game.load.audio('dukeouw', 'assets/sounds/effects/duke-ouw.mp3');
+		this.game.load = this.game.load.audio('dukeshoot1', 'assets/sounds/effects/duke-shoot.mp3');
+		this.game.load = this.game.load.audio('dukeshoot2', 'assets/sounds/effects/duke-shoot.wav');
+		this.game.load = this.game.load.audio('enemyouch', 'assets/sounds/effects/enemy-ouch.wav');
+		this.game.load = this.game.load.audio('enemyshoot', 'assets/sounds/effects/enemy-shoot.wav');
+		this.game.load = this.game.load.audio('pickup', 'assets/sounds/effects/item-pickup.ogg');
 	},
 	create: function(){
 		this.state.start('Play');
