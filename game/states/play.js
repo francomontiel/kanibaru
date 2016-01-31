@@ -9,7 +9,7 @@ States.Play.prototype = {
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 	},
 	create: function(){
-		this.state.start('CathedralClosed');
+		this.state.start('Terminal');
 		//this.game.background = this.game.add.sprite(this.game.world.centerX - 190, this.game.world.centerY - 40, 'title');
 		/*this.game.background = this.game.add.tileSprite(0, 0, 1500, 1199, 'map1');
 		this.game.world.setBounds(0, 0, 1500, 1199);

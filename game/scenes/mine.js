@@ -7,12 +7,12 @@ States.Mine.prototype = {
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 	},
 	create: function(){
-		this.game.background = this.game.add.tileSprite(0, 0, 2048, 1474, 'mine');
-		this.game.world.setBounds(0, 0, 2048, 1474);
+		this.game.background = this.game.add.tileSprite(0, 0, 1340, 1000, 'mine');
+		this.game.world.setBounds(0, 0, 1340, 1000);
 
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
-		this.game.Duke.reset(113, 1057, 100);
+		this.game.Duke.reset(30, 909, 100);
 		
 		this.game.cursors = game.input.keyboard.createCursorKeys();
 
@@ -20,14 +20,23 @@ States.Mine.prototype = {
 
 		this.game.obstacles = this.game.add.group();
 		this.game.obstacles.enableBody = true;
-		this.createObstacle();;
+		this.createObstacle(0, 0, 559, 757);
+		this.createObstacle(553, 289, 450, 81);
+		this.createObstacle(850, 505, 53, 495);
+		this.createObstacle(895, 600, 121, 400);
+		this.createObstacle(1013, 745, 227, 255);
+		this.createObstacle(1153, 0, 87, 491);
+		this.createObstacle(561, 0, 595, 67);
+		this.createObstacle(529, 47, 153, 255);
+		this.createObstacle(887, 65, 165, 159);
+
 
 		//me lo paro "El taxi" me lo paroo
-		this.game.taxi = this.createObstacle();
+		//this.game.taxi = this.createObstacle();
 
 		this.game.collectibles = this.game.add.group();
-		//this.game.collectibles.enableBody = true;
-		//this.game.collectibles.add(new Collectible(game, 650, 800, 0, 0, 0, 'sling'));
+		this.game.collectibles.enableBody = true;
+		this.game.collectibles.add(new Collectible(game, 767, 171, 0, 0, -1, 'sword'));
 
 		this.game.enemies = [];
 		//var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
@@ -95,6 +104,6 @@ States.Mine.prototype.handleItemCollision = function (duke, item) {
     item.kill();
 };
 
-States.Terminal.prototype.nextScene = function(duke, taxi) {
+/*States.Terminal.prototype.nextScene = function(duke, taxi) {
 	this.state.start('');
-}
+}*/
