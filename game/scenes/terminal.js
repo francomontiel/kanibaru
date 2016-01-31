@@ -11,7 +11,7 @@ States.Terminal.prototype = {
 		this.game.world.setBounds(0, 0, 1500, 1199);
 
 		this.game.Duke = new Duke(this.game);
-		globalDuke = this.game.Duke;
+		//globalDuke = this.game.Duke;
 		this.game.Duke.render(this.game);
 		this.game.Duke.reset(595, 975, 100);
 		
@@ -34,6 +34,11 @@ States.Terminal.prototype = {
 		this.game.collectibles = this.game.add.group();
 		this.game.collectibles.enableBody = true;
 		this.game.collectibles.add(new Collectible(game, 900, 390, 0, 0, -1, 'cross'));
+		// ctor (game, x, y, health, speed, weapon, key, type, name)
+		// type should be 'head', 'torso', 'legs' or null. Name is the sprite name
+		// this.game.collectibles.add(new Collectible(game, 650, 910, 0, -10, -1, 'barrilMoreno', 'legs', 'morenoLegs'));
+		// this.game.collectibles.add(new Collectible(game, 650, 1020, 0, 550, -1, 'pantalonCaporal', 'legs', 'caporalLegs'));
+		// this.game.collectibles.add(new Collectible(game, 650, 1130, 0, 0, 1, 'mascaraDiablo', 'head', 'diabloHead'));
 
 		this.game.enemies = [];
 		var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
@@ -91,6 +96,9 @@ States.Terminal.prototype.createObstacle = function(x, y, width, height) {
 }
 
 States.Terminal.prototype.handleItemCollision = function (duke, item) {
+	if(item.bodyPart){
+		this.game.Duke.changeSprite(item.indentifier, item.bodyPart);
+	}
 
     this.game.Duke.health += item.health;
     this.game.Duke.speed += item.speed;

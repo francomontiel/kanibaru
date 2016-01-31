@@ -36,7 +36,10 @@ States.Mine.prototype = {
 
 		this.game.collectibles = this.game.add.group();
 		this.game.collectibles.enableBody = true;
-		this.game.collectibles.add(new Collectible(game, 767, 171, 0, 0, -1, 'sword'));
+		this.game.sword = new Collectible(game, 767, 171, 0, 0, -1, 'sword');
+		this.game.collectibles.add(new Collectible(game, 50, 850, 100, -10, -1, 'barrilMoreno', 'legs', 'morenoLegs'));
+		this.game.collectibles.add(new Collectible(game, 50, 900, 0, 0, 1, 'mascaraDiablo', 'head', 'diabloHead'));
+
 
 		this.game.enemies = [];
 		enemy = new ShootingEnemy(game, 50, 600, 480, 1);
@@ -82,7 +85,7 @@ States.Mine.prototype = {
 		this.game.redSplash.alpha = 0;
 		this.game.redSplash.fixedToCamera = true;
 
-		this.game.music = this.game.add.audio('idilio');
+		this.game.music = this.game.add.audio('chiruchiru');
 		this.game.music.loop = true;
 		this.game.music.play();
 		this.game.isWaiting = false;
@@ -95,6 +98,7 @@ States.Mine.prototype = {
 		if (!this.game.isWaiting) {
 			this.game.redSplash.alpha = 0;
 			//this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.taxi, this.nextScene, null, this);
+			this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.sword, this.collectSword, null, this);
 			this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
 			this.game.enemies.forEach(this.checkPlayerEnemyCollision);
 			this.game.enemies.forEach(this.checkEnemyObstacleCollision);
@@ -127,6 +131,9 @@ States.Mine.prototype.createObstacle = function(x, y, width, height) {
 }
 
 States.Mine.prototype.handleItemCollision = function (duke, item) {
+	if(item.bodyPart){
+		this.game.Duke.changeSprite(item.indentifier, item.bodyPart);
+	}
 
     this.game.Duke.health += item.health;
     this.game.Duke.speed += item.speed;
@@ -135,6 +142,10 @@ States.Mine.prototype.handleItemCollision = function (duke, item) {
     	this.game.Duke.changeWeapon(item.weapon);
     }
 
+    item.kill();
+};
+
+States.Mine.prototype.collectSword = function (duke, item) {
     item.kill();
     this.game.tio.sprite.visible = true;
     this.game.tio.weapon.visible = true;

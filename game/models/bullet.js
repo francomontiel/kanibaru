@@ -212,9 +212,9 @@ Weapon.FirestoneBullet = function (game) {
 Weapon.FirestoneBullet.prototype = Object.create(Phaser.Group.prototype);
 Weapon.FirestoneBullet.prototype.constructor = Weapon.FirestoneBullet;
 
-Weapon.FirestoneBullet.prototype.fire = function (source, facing, dangle, dspeed) {
+Weapon.FirestoneBullet.prototype.fire = function (game, source, facing, dangle, dspeed) {
 
-    if (this.game.time.time < this.nextFire) { return; }
+    if (game.time.time < this.nextFire) { return; }
 
     var x = source.x;// + 10;
     var y = source.y;// + 10;

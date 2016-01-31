@@ -41,8 +41,9 @@ States.Oruro2.prototype = {
 		this.game.taxi = this.createObstacle(72, 1108, 54, 54);
 
 		this.game.collectibles = this.game.add.group();
-		//this.game.collectibles.enableBody = true;
-		//this.game.collectibles.add(new Collectible(game, 650, 800, 0, 0, 0, 'sling'));
+		this.game.collectibles.enableBody = true;
+		this.game.collectibles.add(new Collectible(game, 1820, 310, 0, 550, -1, 'pantalonCaporal', 'legs', 'caporalLegs'));
+		this.game.collectibles.add(new Collectible(game, 1870, 310, 0, 0, 1, 'mascaraDiablo', 'head', 'diabloHead'));
 
 		this.game.enemies = [];
 		var enemy = new FollowingEnemy(game, 50, 150, 1450, 50, 200, 1, 5);
@@ -103,7 +104,7 @@ States.Oruro2.prototype = {
 			this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
 			this.game.enemies.forEach(this.checkPlayerEnemyCollision);
 			this.game.enemies.forEach(this.checkEnemyObstacleCollision);
-			//this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
+			this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
 
 			this.game.Duke.update();
 			this.game.enemies.forEach(function(element, index, array) {element.update()});
@@ -132,6 +133,9 @@ States.Oruro2.prototype.createObstacle = function(x, y, width, height) {
 }
 
 States.Oruro2.prototype.handleItemCollision = function (duke, item) {
+	if(item.bodyPart){
+		this.game.Duke.changeSprite(item.indentifier, item.bodyPart);
+	}
 
     this.game.Duke.health += item.health;
     this.game.Duke.speed += item.speed;
