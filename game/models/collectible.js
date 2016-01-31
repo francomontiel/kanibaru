@@ -1,4 +1,9 @@
-var Collectible = function (game, x, y, health, speed, weapon, key) {
+var Collectible = function (game, x, y, health, speed, weapon, key, bodyPart, indentifier) {
+	//bodyPart should be 'head', 'torso', 'legs' or null. indentifier is the sprite name
+
+	this.bodyPart = bodyPart;
+	this.indentifier = indentifier;
+
 	this.game = game;
 
 	Phaser.Sprite.call(this, game, 0, 0, key);

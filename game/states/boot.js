@@ -17,13 +17,13 @@ States.Boot.prototype = {
 		this.game.load = this.game.load.spritesheet('normalHead', 'assets/images/duke/normalHeadSheet.png', 110, 110);
 		this.game.load = this.game.load.spritesheet('normalTorso', 'assets/images/duke/normalTorsoSheet.png', 110, 110);
 		this.game.load = this.game.load.spritesheet('normalLegs', 'assets/images/duke/normalLegsSheet.png', 110, 110);
-		// this.game.load = this.game.load.spritesheet('singleHead', 'assets/images/duke/singleHead.png', 110, 110);
-		// this.game.load = this.game.load.spritesheet('singleTorso', 'assets/images/duke/singleTorso.png', 110, 110);
-		// this.game.load = this.game.load.spritesheet('singleLegs', 'assets/images/duke/singleLegs.png', 110, 110);
+		this.game.load = this.game.load.spritesheet('caporalLegs', 'assets/images/duke/caporalLegsSheet.png', 110, 110);
+		this.game.load = this.game.load.spritesheet('morenoLegs', 'assets/images/duke/morenoLegsSheet.png', 110, 110);
+		// this.game.load = this.game.load.spritesheet('diabloHead', 'assets/images/duke/diabloHeadSheet.png', 110, 110); 
+
 		
 		this.game.load = this.game.load.spritesheet('dukeCollider', 'assets/images/duke/collider.png');
 
-		//this.game.load = this.game.load.image('obstacle', 'assets/images/terrain/obstacle.png');
 		this.game.load = this.game.load.image('obstacle', 'assets/images/obstacles/collider.png');
 
 		this.game.load = this.game.load.spritesheet('enemy1', 'assets/images/enemies/enemy1.png', 100, 100);
@@ -34,11 +34,15 @@ States.Boot.prototype = {
 		this.game.load = this.game.load.image('bulletStone1', 'assets/images/bullets/stone1.png');
 		this.game.load = this.game.load.image('bulletFireStone1', 'assets/images/bullets/firestone1.png');
 
+		// COLLECTIBLES
 		this.game.load = this.game.load.image('sling', 'assets/images/items/sling.png');
+		this.game.load = this.game.load.image('barrilMoreno', 'assets/images/items/barrilMoreno.png');
+		this.game.load = this.game.load.image('pantalonCaporal', 'assets/images/items/pantalonCaporal.png');
 
 		this.game.load = this.game.load.image('cutscene1', 'assets/images/cutscenes/1.png');
 
-		this.game.load = this.game.load.audio('chiruchiru', 'assets/sounds/music/Chiru8bit.wav');
+		// this.game.load = this.game.load.audio('chiruchiru', 'assets/sounds/music/Chiru8bit.wav');
+		this.game.load = this.game.load.audio('chiruchiru', 'assets/sounds/music/idilio8bit.wav');
 	},
 	create: function(){
 		this.state.start('Play');

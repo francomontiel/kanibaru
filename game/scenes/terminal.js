@@ -32,7 +32,10 @@ States.Terminal.prototype = {
 
 		this.game.collectibles = this.game.add.group();
 		this.game.collectibles.enableBody = true;
+		// ctor (game, x, y, health, speed, weapon, key, type, name)
+		// type should be 'head', 'torso', 'legs' or null. Name is the sprite name
 		this.game.collectibles.add(new Collectible(game, 650, 800, 0, 0, 0, 'sling'));
+		this.game.collectibles.add(new Collectible(game, 650, 910, 0, -10, -1, 'barrilMoreno', 'legs', 'morenoLegs'));
 
 		this.game.enemies = [];
 		var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
@@ -85,6 +88,9 @@ States.Terminal.prototype.createObstacle = function(x, y, width, height) {
 }
 
 States.Terminal.prototype.handleItemCollision = function (duke, item) {
+	if(item.bodyPart){
+		this.game.Duke.changeSprite(item.indentifier, item.bodyPart);
+	}
 
     this.game.Duke.health += item.health;
     this.game.Duke.speed += item.speed;

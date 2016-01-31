@@ -4,9 +4,9 @@ function Duke(game){
 	this.headSprite = null;
 	this.torsoSprite = null;
 	this.legsSprite = null;
-	this.head = 'normalHead';
-	this.torso = 'normalTorso';
-	this.legs = 'normalLegs';
+	this.headAnimation = 'normalHead';
+	this.torsoAnimation = 'normalTorso';
+	this.legsAnimation = 'normalLegs';
 	this.speed = 150;
 	this.facing = 0; //Left=0; Right=1; Up=2; Down=3
 	this.sprite = null;
@@ -43,63 +43,85 @@ Duke.prototype.update = function(){
 	}
 };
 
+Duke.prototype.changeSprite = function(newSprite, type){
+	if(type == 'legs'){
+		this.legsAnimation = newSprite;
+		this.legsSprite.kill();
+		this.legsSprite = this.game.add.sprite(this.colliderSprite.x, this.colliderSprite.y, newSprite);
+	}
+
+	if(type == 'torso'){
+		this.torsoAnimation = newSprite;
+		this.torsoSprite.kill();
+		this.torsoSprite = this.game.add.sprite(this.colliderSprite.x, this.colliderSprite.y, newSprite);
+	}
+
+	if(type == 'head'){
+		this.headAnimation = newSprite;
+		this.headSprite.kill();
+		this.headSprite = this.game.add.sprite(this.colliderSprite.x, this.colliderSprite.y, newSprite);
+	}
+
+	this.loadAnimations();
+};
+
+Duke.prototype.loadAnimations = function(){
+	this.headSprite.animations.add(this.headAnimation + 'Left', [0], 1, true);
+	this.headSprite.animations.add(this.headAnimation + 'Right', [1], 1, true);
+	this.headSprite.animations.add(this.headAnimation + 'Up', [2], 1, true);
+	this.headSprite.animations.add(this.headAnimation + 'Down', [3], 1, true);
+
+	this.torsoSprite.animations.add(this.torsoAnimation + 'Left', [9, 10, 9, 11], 10, true);
+	this.torsoSprite.animations.add(this.torsoAnimation + 'Right', [3, 4, 3, 5], 10, true);
+	this.torsoSprite.animations.add(this.torsoAnimation + 'Up', [0, 1, 0, 2], 10, true);
+	this.torsoSprite.animations.add(this.torsoAnimation + 'Down', [6, 7, 6, 8], 10, true);
+
+	this.legsSprite.animations.add(this.legsAnimation + 'Left', [9, 10, 9, 11], 10, true);
+	this.legsSprite.animations.add(this.legsAnimation + 'Right', [3, 4, 3, 5], 10, true);
+	this.legsSprite.animations.add(this.legsAnimation + 'Up', [0, 1, 0, 2], 10, true);
+	this.legsSprite.animations.add(this.legsAnimation + 'Down', [6, 7, 6, 8], 10, true);
+};
+
+Duke.prototype.animate = function(direction){
+	this.headSprite.play(this.headAnimation + direction);
+	this.torsoSprite.play(this.torsoAnimation + direction);
+	this.legsSprite.play(this.legsAnimation + direction);
+}
+
 Duke.prototype.handleKeyDown = function() {
 	this.isMoving = false;
 	if (this.game.cursors.up.isDown){
 		this.facing = 2;
 		this.isMoving = true;
 
-		//this.game.Duke.headSprite.body.velocity.y = -this.speed;
-		//this.game.Duke.torsoSprite.body.velocity.y = -this.speed;
-		//this.game.Duke.legsSprite.body.velocity.y = -this.speed;
 		this.game.Duke.colliderSprite.body.velocity.y = -this.speed;
 
-		this.headSprite.play('normalHeadUp');
-		this.torsoSprite.play('normalTorsoUp');
-		this.legsSprite.play('normalLegsUp');
+		this.animate('Up');
 	}
 	else if (this.game.cursors.down.isDown){
 		this.facing = 3;
 		this.isMoving = true;
 
-		//this.game.Duke.headSprite.body.velocity.y = this.speed;
-		//this.game.Duke.torsoSprite.body.velocity.y = this.speed;
-		//this.game.Duke.legsSprite.body.velocity.y = this.speed;
 		this.game.Duke.colliderSprite.body.velocity.y = this.speed;
 
-		this.headSprite.play('normalHeadDown');
-		this.torsoSprite.play('normalTorsoDown');
-		this.legsSprite.play('normalLegsDown');
+		this.animate('Down');
 	}
 	else if (this.game.cursors.left.isDown){
 		this.facing = 0;
 		this.isMoving = true;
 
-		//this.game.Duke.headSprite.body.velocity.x = -this.speed;
-		//this.game.Duke.torsoSprite.body.velocity.x = -this.speed;
-		//this.game.Duke.legsSprite.body.velocity.x = -this.speed;
 		this.game.Duke.colliderSprite.body.velocity.x = -this.speed;
 
-		this.headSprite.play('normalHeadLeft');
-		this.torsoSprite.play('normalTorsoLeft');
-		this.legsSprite.play('normalLegsLeft');
+		this.animate('Left');
 	}
 	else if (this.game.cursors.right.isDown){
 		this.facing = 1;
 		this.isMoving = true;
 
-		//this.game.Duke.headSprite.body.velocity.x = this.speed;
-		//this.game.Duke.torsoSprite.body.velocity.x = this.speed;
-		//this.game.Duke.legsSprite.body.velocity.x = this.speed;
 		this.game.Duke.colliderSprite.body.velocity.x = this.speed;
 
-		this.headSprite.play('normalHeadRight');
-		this.torsoSprite.play('normalTorsoRight');
-		this.legsSprite.play('normalLegsRight');
+		this.animate('Right');
 	} else if (!this.isMoving) {
-		// this.headSprite.animations.stop();
-		// this.torsoSprite.animations.stop();
-		// this.legsSprite.animations.stop();
 		//Left=0; Right=1; Up=2; Down=3
 		switch (this.facing) {
 			case 0:
@@ -138,6 +160,7 @@ Duke.prototype.handleKeyDown = function() {
 	this.legsSprite.y = this.headSprite.y;
 }
 
+
 Duke.prototype.handleKeyUp = function(e) {
 	if (this.game.Duke.currentWeapon > -1 && e.keyCode == Phaser.Keyboard.SPACEBAR) {
 		var dangle = 10 - Math.min(15, this.game.Duke.chargeTime / 3);
@@ -150,9 +173,15 @@ Duke.prototype.handleKeyUp = function(e) {
 
 Duke.prototype.render = function(){
 	this.colliderSprite = this.game.add.sprite(10, 230, 'dukeCollider');
-	this.headSprite = this.game.add.sprite(10, 230, this.head);
-	this.torsoSprite = this.game.add.sprite(10, 230, this.torso);
-	this.legsSprite = this.game.add.sprite(10, 230, this.legs);
+
+	this.morenoLegsSprite = this.game.add.sprite(10, 230, 'morenoLegs');
+	this.normalheadSprite = this.game.add.sprite(10, 230, 'normalHead');
+	this.normaltorsoSprite = this.game.add.sprite(10, 230, 'normalTorso');
+	this.normallegsSprite = this.game.add.sprite(10, 230, 'normalLegs');
+
+	this.headSprite = this.normalheadSprite;
+	this.torsoSprite = this.normaltorsoSprite;
+	this.legsSprite = this.normallegsSprite;
 
 	this.colliderSprite.alpha = 0;
 
@@ -164,35 +193,9 @@ Duke.prototype.render = function(){
 	this.colliderSprite.immovable = true;
 	this.colliderSprite.body.collideWorldBounds = true;
 
-	this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
-	this.headSprite.animations.add('normalHeadRight', [1], 10, true);
-	this.headSprite.animations.add('normalHeadUp', [2], 10, true);
-	this.headSprite.animations.add('normalHeadDown', [3], 10, true);
 
-	this.torsoSprite.animations.add('normalTorsoLeft', [9, 10, 9, 11], 10, true);
-	this.torsoSprite.animations.add('normalTorsoRight', [3, 4, 3, 5], 10, true);
-	this.torsoSprite.animations.add('normalTorsoUp', [0, 1, 0, 2], 10, true);
-	this.torsoSprite.animations.add('normalTorsoDown', [6, 7, 6, 8], 10, true);
+	this.loadAnimations();
 
-	this.legsSprite.animations.add('normalLegsLeft', [9, 10, 9, 11], 10, true);
-	this.legsSprite.animations.add('normalLegsRight', [3, 4, 3, 5], 10, true);
-	this.legsSprite.animations.add('normalLegsUp', [0, 1, 0, 2], 10, true);
-	this.legsSprite.animations.add('normalLegsDown', [6, 7, 6, 8], 10, true);
-
-	// this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
-	// this.headSprite.animations.add('normalHeadRight', [0], 10, true);
-	// this.headSprite.animations.add('normalHeadUp', [0], 10, true);
-	// this.headSprite.animations.add('normalHeadDown', [0], 10, true);
-
-	// this.torsoSprite.animations.add('normalTorsoLeft', [0], 10, true);
-	// this.torsoSprite.animations.add('normalTorsoRight', [0], 10, true);
-	// this.torsoSprite.animations.add('normalTorsoUp', [0], 10, true);
-	// this.torsoSprite.animations.add('normalTorsoDown', [0], 10, true);
-
-	// this.legsSprite.animations.add('normalLegsLeft', [0], 10, true);
-	// this.legsSprite.animations.add('normalLegsRight', [0], 10, true);
-	// this.legsSprite.animations.add('normalLegsUp', [0], 10, true);
-	// this.legsSprite.animations.add('normalLegsDown', [0], 10, true);
 
 	this.colliderSprite.anchor.setTo(0.5, 0.5);
 	this.colliderSprite.x = this.headSprite.x + this.headSprite.width / 2;
@@ -209,23 +212,6 @@ Duke.prototype.render = function(){
 	this.game.input.keyboard.onUpCallback = this.game.Duke.handleKeyUp;
 };
 
-Duke.prototype.changeHead = function(newHead){
-	this.head = newHead;
-	this.headSprite.kill();
-	this.headSprite = this.game.add.sprite(150, 150, newHead);	
-};
-
-Duke.prototype.changeTorso = function(newTorso){
-	this.torso = newTorso;
-	this.torsoSprite.kill();
-	this.torsoSprite = this.game.add.sprite(150, 150, newTorso);	
-};
-
-Duke.prototype.changeLegs = function(newLegs){
-	this.legs = newLegs;
-	this.legsSprite.kill();
-	this.legsSprite = this.game.add.sprite(150, 150, newLegs);	
-};
 
 Duke.prototype.handleEnemyCollision = function(duke, enemy){
 	if (this.game.Duke.timeDamaged <= 0 && this.game.Duke.health > 0) {
