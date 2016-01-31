@@ -131,6 +131,7 @@ Duke.prototype.render = function(){
 	this.game.physics.arcade.enable(this.legsSprite);
 
 	this.colliderSprite.immovable = true;
+	this.colliderSprite.body.collideWorldBounds = true;
 
 	//this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
 	//this.headSprite.animations.add('normalHeadRight', [1], 10, true);
