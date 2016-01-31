@@ -47,7 +47,7 @@ States.Mine.prototype = {
 		this.game.redSplash.alpha = 0;
 		this.game.redSplash.fixedToCamera = true;
 
-		this.game.music = this.game.add.audio('idilio');
+		this.game.music = this.game.add.audio('chiruchiru');
 		this.game.music.loop = true;
 		this.game.music.play();
 		this.game.isWaiting = false;
