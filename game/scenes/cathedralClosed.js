@@ -21,12 +21,12 @@ States.CathedralClosed.prototype = {
 		this.game.obstacles = this.game.add.group();
 		this.game.obstacles.enableBody = true;
 		this.createObstacle(751, 747, 785, 335);
-		this.createObstacle(1513, 789, 343, 209);
+		this.createObstacle(1513, 789, 311, 178);
 		this.createObstacle(813, 0, 707, 183);
 		this.createObstacle(763, 285, 763, 263);
-		this.createObstacle(1513, 345, 341, 201);
-		this.createObstacle(525, 771, 21, 433);
-		this.createObstacle(521, 221, 29, 437);
+		this.createObstacle(1513, 345, 327, 177);
+		this.createObstacle(516, 773, 33, 390);
+		this.createObstacle(516, 220, 33, 390);
 		this.createObstacle(337, 587, 91, 243);
 		this.createObstacle(0, 0, 225, 1429);
 		this.createObstacle(1803, 0, 397, 258);

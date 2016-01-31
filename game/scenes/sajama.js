@@ -20,7 +20,7 @@ States.Sajama.prototype = {
 
 		this.game.obstacles = this.game.add.group();
 		this.game.obstacles.enableBody = true;
-		this.createObstacle(0, 0, 798, 479);
+		this.createObstacle(0, 0, 1100, 415);
 		this.createObstacle(800, 374, 235, 198);
 
 		//me lo paro "El taxi" me lo paroo

@@ -20,20 +20,20 @@ States.Oruro1.prototype = {
 
 		this.game.obstacles = this.game.add.group();
 		this.game.obstacles.enableBody = true;
-		this.createObstacle(0, 685, 361, 465);
-		this.createObstacle(441, 777, 241, 227);
+		this.createObstacle(0, 685, 350, 400);
+		this.createObstacle(437, 757, 247, 200);
 		this.createObstacle(400, 367, 300, 405);
-		this.createObstacle(0, 50, 145, 290);
-		this.createObstacle(165, 367, 137, 145);
-		this.createObstacle(301, 160, 151, 123);
-		this.createObstacle(55, 533, 151, 119);
-		this.createObstacle(620, 0, 211, 267);
-		this.createObstacle(863, 417, 233, 223);
+		this.createObstacle(0, 50, 145, 229);
+		this.createObstacle(158, 371, 135, 91);
+		this.createObstacle(301, 160, 151, 71);
+		this.createObstacle(55, 533, 137, 71);
+		this.createObstacle(620, 0, 211, 208);
+		this.createObstacle(868, 420, 231, 247);
 		this.createObstacle(870, 813, 211, 205);
 		this.createObstacle(853, 1269, 1195, 205);
 		this.createObstacle(1097, 1073, 951, 203);
 		this.createObstacle(1093, 0, 715, 623);
-		this.createObstacle(1153, 830, 47, 51);
+		this.createObstacle(1553, 830, 47, 51);
 		this.createObstacle(1703, 950, 100, 43);
 
 		//me lo paro "El taxi" me lo paroo
