@@ -13,7 +13,7 @@ var Bullet = function (game, key, damage) {
     this.tracking = false;
     this.scaleSpeed = 0;
 
-    this.playerDamage = damage;
+    this.damage = damage;
 
 };
 
@@ -58,8 +58,8 @@ Weapon.BlueBullet = function (game) {
     Phaser.Group.call(this, game, game.world, 'Blue Bullet', false, true, Phaser.Physics.ARCADE);
 
     this.nextFire = 0;
-    this.bulletSpeed = 600;
-    this.fireRate = 400;
+    this.bulletSpeed = 500;
+    this.fireRate = 500;
 
     for (var i = 0; i < 64; i++)
     {
@@ -81,6 +81,108 @@ Weapon.BlueBullet.prototype.fire = function (source, facing) {
     var y = source.y + source.height / 2 + 10;
 
     this.getFirstExists(false).fire(x, y, facing * 90, this.bulletSpeed, 0, 0);
+
+    this.nextFire = this.game.time.time + this.fireRate;
+};
+
+Weapon.StoneBullet = function (game) {
+
+    Phaser.Group.call(this, game, game.world, 'Stone Bullet', false, true, Phaser.Physics.ARCADE);
+
+    this.nextFire = 0;
+    this.bulletSpeed = 500;
+    this.fireRate = 400;
+
+    for (var i = 0; i < 64; i++)
+    {
+        this.add(new Bullet(game, 'bulletStone1', 10), true);
+    }
+
+    return this;
+
+};
+
+Weapon.StoneBullet.prototype = Object.create(Phaser.Group.prototype);
+Weapon.StoneBullet.prototype.constructor = Weapon.StoneBullet;
+
+Weapon.StoneBullet.prototype.fire = function (source, facing, dangle, dspeed) {
+
+    if (this.game.time.time < this.nextFire) { return; }
+
+    var x = source.x;// + 10;
+    var y = source.y;// + 10;
+    var angle = 0;
+    var gx = 0;
+    var gy = 0;
+    switch (facing) {
+        case 0:
+            angle = 180 + dangle;
+            gy = 50;
+            break;
+        case 1:
+            angle = 0 + dangle;
+            gy = -50;
+            break;
+        case 2:
+            angle = 270 + dangle;
+            gx = -50
+            break;
+        case 3:
+            angle = 90 + dangle;
+            gx = 50;
+            break;
+        default:
+    }
+
+    this.getFirstExists(false).fire(x, y, angle, this.bulletSpeed + dspeed, gx, gy);
+
+    this.nextFire = this.game.time.time + this.fireRate;
+};
+
+Weapon.FirestoneBullet = function (game) {
+
+    Phaser.Group.call(this, game, game.world, 'Fire Stone Bullet', false, true, Phaser.Physics.ARCADE);
+
+    this.nextFire = 0;
+    this.bulletSpeed = 700;
+    this.fireRate = 400;
+
+    for (var i = 0; i < 64; i++)
+    {
+        this.add(new Bullet(game, 'bulletFireStone1', 10), true);
+    }
+
+    return this;
+
+};
+
+Weapon.FirestoneBullet.prototype = Object.create(Phaser.Group.prototype);
+Weapon.FirestoneBullet.prototype.constructor = Weapon.FirestoneBullet;
+
+Weapon.FirestoneBullet.prototype.fire = function (source, facing) {
+
+    if (this.game.time.time < this.nextFire) { return; }
+
+    var x = source.x;// + 10;
+    var y = source.y;// + 10;
+    var angle;
+    switch (facing) {
+        case 0:
+            angle = 180;
+            break;
+        case 1:
+            angle = 0;
+            break;
+        case 2:
+            angle = 270;
+            break;
+        case 3:
+            angle = 90;
+            break;
+        default:
+    }
+
+    this.getFirstExists(false).fire(x, y, angle, this.bulletSpeed, 0, 0);
 
     this.nextFire = this.game.time.time + this.fireRate;
 };
