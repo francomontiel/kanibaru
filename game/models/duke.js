@@ -7,7 +7,8 @@ function Duke(game){
 	this.head = 'normalHead';
 	this.torso = 'normalTorso';
 	this.legs = 'normalLegs';
-	this.speed = 150;
+	//this.speed = 150;
+	this.speed = 300;
 	this.facing = 0; //Left=0; Right=1; Up=2; Down=3
 	this.sprite = null;
 	this.timeDamaged = 0;

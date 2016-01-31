@@ -106,5 +106,6 @@ States.Terminal.prototype.handleItemCollision = function (duke, item) {
 }*/
 
 States.Terminal.prototype.nextScene = function(duke, taxi) {
+	this.game.music.stop();
 	this.state.start('CathedralClosed');
 }

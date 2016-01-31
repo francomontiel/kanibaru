@@ -106,5 +106,6 @@ States.CathedralOpen.prototype.handleItemCollision = function (duke, item) {
 };
 
 States.CathedralOpen.prototype.nextScene = function(duke, taxi) {
+	this.game.music.stop();
 	this.state.start('Mine');
 }
