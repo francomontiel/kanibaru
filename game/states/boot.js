@@ -31,6 +31,10 @@ States.Boot.prototype = {
 		this.game.load = this.game.load.spritesheet('ghost', 'assets/images/enemies/ghost.png', 64, 64);
 
 		this.game.load = this.game.load.image('bullet1', 'assets/images/bullets/blue.png');
+
+
+
+		this.game.load = this.game.load.audio('chiruchiru', 'assets/sounds/music/Chiru8bit.wav');
 	},
 	create: function(){
 		this.state.start('Play');

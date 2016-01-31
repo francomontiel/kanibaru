@@ -38,6 +38,10 @@ States.Terminal.prototype = {
 		this.game.redSplash = this.game.add.sprite(0, 0, 'redSplash');
 		this.game.redSplash.alpha = 0;
 		this.game.redSplash.fixedToCamera = true;
+
+		this.game.music = this.game.add.audio('chiruchiru');
+		this.game.music.loop = true;
+		this.game.music.play();
 	},
 	update: function(){
 		this.game.redSplash.alpha = 0;
