@@ -174,7 +174,6 @@ Duke.prototype.handleKeyUp = function(e) {
 Duke.prototype.render = function(){
 	this.colliderSprite = this.game.add.sprite(10, 230, 'dukeCollider');
 
-	this.morenoLegsSprite = this.game.add.sprite(10, 230, 'morenoLegs');
 	this.normalheadSprite = this.game.add.sprite(10, 230, 'normalHead');
 	this.normaltorsoSprite = this.game.add.sprite(10, 230, 'normalTorso');
 	this.normallegsSprite = this.game.add.sprite(10, 230, 'normalLegs');
