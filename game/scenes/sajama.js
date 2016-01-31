@@ -96,6 +96,6 @@ States.Sajama.prototype.handleItemCollision = function (duke, item) {
     item.kill();
 };
 
-States.Terminal.prototype.nextScene = function(duke, taxi) {
+States.Sajama.prototype.nextScene = function(duke, taxi) {
 	this.state.start('Oruro2');
 }

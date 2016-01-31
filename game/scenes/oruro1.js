@@ -109,6 +109,6 @@ States.Oruro1.prototype.handleItemCollision = function (duke, item) {
     item.kill();
 };
 
-States.Terminal.prototype.nextScene = function(duke, taxi) {
+States.Oruro1.prototype.nextScene = function(duke, taxi) {
 	this.state.start('Sajama');
 }

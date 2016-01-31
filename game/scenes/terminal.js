@@ -12,7 +12,7 @@ States.Terminal.prototype = {
 
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
-		this.game.Duke.reset(595, 975, 100);
+		this.game.Duke.reset(595, 975, 1);
 		
 		this.game.cursors = game.input.keyboard.createCursorKeys();
 
