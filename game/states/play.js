@@ -9,7 +9,8 @@ States.Play.prototype = {
 	},
 	create: function(){
 		//this.game.background = this.game.add.sprite(this.game.world.centerX - 190, this.game.world.centerY - 40, 'title');
-		this.game.background = this.game.add.sprite(0, 0, 'mapex');
+		this.game.background = this.game.add.tileSprite(0, 0, 1500, 1199, 'mapex');
+		this.game.world.setBounds(0, 0, 1500, 1199);
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
 		this.game.cursors = game.input.keyboard.createCursorKeys();
@@ -29,14 +30,19 @@ States.Play.prototype = {
 		enemy = new BasicEnemyY(game, 50, 600, 350, 100, 100, 0, 10);
 		enemy.render();
 		this.game.enemies.push(enemy);
+		enemy = new FollowingEnemy(game, 50, 400, 200, 100, 300, 0, 50);
+		enemy.render();
+		this.game.enemies.push(enemy);
 
 		this.game.redSplash = this.game.add.sprite(0, 0, 'redSplash');
 		this.game.redSplash.alpha = 0;
+		this.game.redSplash.fixedToCamera = true;
 	},
 	update: function(){
 		this.game.redSplash.alpha = 0;
 		this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
 		this.game.enemies.forEach(this.checkPlayerEnemyCollision);
+		this.game.enemies.forEach(this.checkEnemyObstacleCollision);
 
 		this.game.Duke.update();
 		this.game.enemies.forEach(function(element, index, array) {element.update()});
@@ -45,4 +51,8 @@ States.Play.prototype = {
 
 States.Play.prototype.checkPlayerEnemyCollision = function(element, index, array) {
 	this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, element.sprite, this.game.Duke.handleEnemyCollision, null, this);
+}
+
+States.Play.prototype.checkEnemyObstacleCollision = function(element, index, array) {
+	this.game.physics.arcade.collide(element.sprite, this.game.obstacles);
 }
