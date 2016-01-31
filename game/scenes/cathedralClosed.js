@@ -1,18 +1,18 @@
-States.Terminal = function(game){
+States.CathedralClosed = function(game){
 };
 
-States.Terminal.prototype = {
+States.CathedralClosed.prototype = {
 	init: function() {
 		this.game.renderer.renderSession.roundPixels = true;
 		this.physics.startSystem(Phaser.Physics.ARCADE);
 	},
 	create: function(){
-		this.game.background = this.game.add.tileSprite(0, 0, 1500, 1199, 'map1');
-		this.game.world.setBounds(0, 0, 1500, 1199);
+		this.game.background = this.game.add.tileSprite(0, 0, 2200, 1430, 'cathedralClosed');
+		this.game.world.setBounds(0, 0, 2200, 1430);
 
 		this.game.Duke = new Duke(this.game);
 		this.game.Duke.render(this.game);
-		this.game.Duke.reset(595, 975, 100);
+		this.game.Duke.reset(1567, 1317, 1);
 		
 		this.game.cursors = game.input.keyboard.createCursorKeys();
 
@@ -20,25 +20,30 @@ States.Terminal.prototype = {
 
 		this.game.obstacles = this.game.add.group();
 		this.game.obstacles.enableBody = true;
-		this.createObstacle(0, 0, 794, 300);
-		this.createObstacle(1165, 0, 345, 1083);
-		this.createObstacle(820, 490, 380, 320);
-		this.createObstacle(0, 471, 322, 728);
-		this.createObstacle(442, 581, 127, 237);
-		this.createObstacle(442, 936, 127, 247);
+		this.createObstacle(751, 747, 785, 335);
+		this.createObstacle(1513, 789, 343, 209);
+		this.createObstacle(813, 0, 707, 183);
+		this.createObstacle(763, 285, 763, 263);
+		this.createObstacle(1513, 345, 341, 201);
+		this.createObstacle(525, 771, 21, 433);
+		this.createObstacle(521, 221, 29, 437);
+		this.createObstacle(337, 587, 91, 243);
+		this.createObstacle(0, 0, 225, 1429);
+		this.createObstacle(1803, 0, 397, 258);
+		this.createObstacle(2093, 252, 107, 69);
 
 		//me lo paro "El taxi" me lo paroo
-		this.game.taxi = this.createObstacle(1049, 21, 103, 115);
+		this.game.taxi = this.createObstacle(559, 643, 92, 100);
 
 		this.game.collectibles = this.game.add.group();
-		//this.game.collectibles.enableBody = true;
-		//this.game.collectibles.add(new Collectible(game, 650, 800, 0, 0, 0, 'sling'));
+		this.game.collectibles.enableBody = true;
+		this.game.collectibles.add(new Collectible(game, 560, 640, 99, 0, -1, 'tunica'));
 
 		this.game.enemies = [];
-		var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
+		//var enemy = new BasicEnemyX(game, 50, 195, 406, 100, 100, 0, 1);
 		//var enemy = new ShootingEnemy(game, 50, 195, 406 ,0);
-		enemy.render();
-		this.game.enemies.push(enemy);
+		//enemy.render();
+		//this.game.enemies.push(enemy);
 
 		this.game.redSplash = this.game.add.sprite(0, 0, 'redSplash');
 		this.game.redSplash.alpha = 0;
@@ -48,10 +53,9 @@ States.Terminal.prototype = {
 		this.game.music.loop = true;
 		this.game.music.play();
 		this.game.isWaiting = false;
-		this.game.changeScene = false;
 
-		this.game.currentCutscene = new Cutscene(this.game, 1000, 'cutscene1');
-		this.game.currentCutscene.render();
+		//this.game.currentCutscene = new Cutscene(this.game, 1000, 'cutscene1');
+		//this.game.currentCutscene.render();
 		//this.game.currentCutscene.start();
 	},
 	update: function(){
@@ -61,7 +65,7 @@ States.Terminal.prototype = {
 			this.game.physics.arcade.collide(this.game.Duke.colliderSprite, this.game.obstacles);
 			this.game.enemies.forEach(this.checkPlayerEnemyCollision);
 			this.game.enemies.forEach(this.checkEnemyObstacleCollision);
-			this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
+			//this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, this.game.collectibles, this.handleItemCollision, null, this);
 
 			this.game.Duke.update();
 			this.game.enemies.forEach(function(element, index, array) {element.update()});
@@ -73,15 +77,15 @@ States.Terminal.prototype = {
 	}
 };
 
-States.Terminal.prototype.checkPlayerEnemyCollision = function(element, index, array) {
+States.CathedralClosed.prototype.checkPlayerEnemyCollision = function(element, index, array) {
 	this.game.physics.arcade.overlap(this.game.Duke.colliderSprite, element.sprite, this.game.Duke.handleEnemyCollision, null, this);
 }
 
-States.Terminal.prototype.checkEnemyObstacleCollision = function(element, index, array) {
+States.CathedralClosed.prototype.checkEnemyObstacleCollision = function(element, index, array) {
 	this.game.physics.arcade.collide(element.sprite, this.game.obstacles);
 }
 
-States.Terminal.prototype.createObstacle = function(x, y, width, height) {
+States.CathedralClosed.prototype.createObstacle = function(x, y, width, height) {
 	var obstacle = this.game.add.tileSprite(x, y, width, height, 'obstacle');
 	obstacle.alpha = 0;
 	this.game.obstacles.add(obstacle);
@@ -89,7 +93,7 @@ States.Terminal.prototype.createObstacle = function(x, y, width, height) {
 	return obstacle;
 }
 
-States.Terminal.prototype.handleItemCollision = function (duke, item) {
+States.CathedralClosed.prototype.handleItemCollision = function (duke, item) {
 
     this.game.Duke.health += item.health;
     this.game.Duke.speed += item.speed;
@@ -101,10 +105,6 @@ States.Terminal.prototype.handleItemCollision = function (duke, item) {
     item.kill();
 };
 
-/*States.Terminal.prototype.playCutscene = function(duke, taxi) {
-	this.game.currentCutscene.start();
-}*/
-
 States.Terminal.prototype.nextScene = function(duke, taxi) {
-	this.state.start('CathedralClosed');
+	this.state.start('Oruro1');
 }

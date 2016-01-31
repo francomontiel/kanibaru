@@ -13,6 +13,12 @@ States.Boot.prototype = {
 		this.game.load = this.game.load.image('redSplash', '/assets/images/red.png');
 
 		this.game.load = this.game.load.image('map1', '/assets/images/terrain/map1.png');
+		this.game.load = this.game.load.image('oruro1', '/assets/images/terrain/oruro.png');
+		this.game.load = this.game.load.image('oruro2', '/assets/images/terrain/oruro.png');
+		this.game.load = this.game.load.image('cathedralOpen', '/assets/images/terrain/socOpen.png');
+		this.game.load = this.game.load.image('cathedralClosed', '/assets/images/terrain/socClose.png');
+		this.game.load = this.game.load.image('sajama', '/assets/images/terrain/sajama.png');
+		this.game.load = this.game.load.image('mine', '/assets/images/terrain/mine.png');
 
 		this.game.load = this.game.load.spritesheet('normalHead', 'assets/images/duke/normalHeadSheet.png', 110, 110);
 		this.game.load = this.game.load.spritesheet('normalTorso', 'assets/images/duke/normalTorsoSheet.png', 110, 110);
@@ -35,10 +41,15 @@ States.Boot.prototype = {
 		this.game.load = this.game.load.image('bulletFireStone1', 'assets/images/bullets/firestone1.png');
 
 		this.game.load = this.game.load.image('sling', 'assets/images/items/sling.png');
+		this.game.load = this.game.load.image('tunica', 'assets/images/items/tunica.png');
+		this.game.load = this.game.load.image('cross', 'assets/images/items/cross.png');
+		this.game.load = this.game.load.image('sword', 'assets/images/items/sword.png');
 
 		this.game.load = this.game.load.image('cutscene1', 'assets/images/cutscenes/1.png');
 
 		this.game.load = this.game.load.audio('chiruchiru', 'assets/sounds/music/Chiru8bit.wav');
+		this.game.load = this.game.load.audio('idilio', 'assets/sounds/music/idilio8bit.wav');
+		this.game.load = this.game.load.audio('sanjose', 'assets/sounds/music/sj8bit.wav');
 	},
 	create: function(){
 		this.state.start('Play');
