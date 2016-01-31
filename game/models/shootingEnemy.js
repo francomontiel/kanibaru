@@ -12,6 +12,7 @@ function ShootingEnemy(game, health, x, y, facing) {
 ShootingEnemy.prototype.render = function() {
 	this.sprite = this.game.add.sprite(this.x, this.y, this.spriteName);
 	this.sprite.playerDamage = this.damage;
+	this.sprite.health = this.health;
 
 	this.weapon = new Weapon.BlueBullet(this.game);
 	this.weapon.visible = true;
@@ -24,7 +25,7 @@ ShootingEnemy.prototype.render = function() {
 }
 
 ShootingEnemy.prototype.update = function() {
-	if (this.health <= 0) {
+	if (this.sprite.health <= 0) {
 		this.sprite.kill();
 		this.weapon.kill();
 	}

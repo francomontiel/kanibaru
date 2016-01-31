@@ -12,7 +12,7 @@ function Duke(game){
 	this.sprite = null;
 	this.timeDamaged = 0;
 	this.weapons = [];
-	this.currentWeapon = 0;
+	this.currentWeapon = -1;
 	this.isMoving = false;
 	this.chargeTime = 0;
 }
@@ -30,6 +30,10 @@ Duke.prototype.update = function(){
 
 	this.handleKeyDown();
 	//this.handleKeyUp();
+	if (this.game.Duke.currentWeapon > -1) {
+		this.game.physics.arcade.collide(this.game.Duke.weapons[this.game.Duke.currentWeapon], this.game.obstacles);
+		this.game.enemies.forEach(this.handleBulletEnemyCollision);
+	}
 
 	this.game.Duke.timeDamaged--;
 	if (this.game.Duke.timeDamaged > 40) {
@@ -135,9 +139,9 @@ Duke.prototype.handleKeyDown = function() {
 }
 
 Duke.prototype.handleKeyUp = function(e) {
-	if (e.keyCode == Phaser.Keyboard.SPACEBAR) {
-		var dangle = 25 - Math.min(25, this.game.Duke.chargeTime / 8);
-		var dspeed = Math.min(300, this.game.Duke.chargeTime * 5);
+	if (this.game.Duke.currentWeapon > -1 && e.keyCode == Phaser.Keyboard.SPACEBAR) {
+		var dangle = 10 - Math.min(15, this.game.Duke.chargeTime / 3);
+		var dspeed = Math.min(300, this.game.Duke.chargeTime * 10);
 		this.game.Duke.chargeTime++;
 		this.game.Duke.weapons[this.game.Duke.currentWeapon].fire(this.game.Duke.colliderSprite, this.game.Duke.facing, dangle, dspeed);
 		this.game.Duke.chargeTime = 0;
@@ -198,7 +202,7 @@ Duke.prototype.render = function(){
 	//this.weapons.push(new Weapon.FirestoneBullet(this.game));
 	this.weapons.push(new Weapon.StoneBullet(this.game));
 	this.weapons.push(new Weapon.FirestoneBullet(this.game));
-	for (var i = 1; i < this.weapons.length; i++) {
+	for (var i = 0; i < this.weapons.length; i++) {
 		this.weapons[i].visible = false;
 	}
 
@@ -246,10 +250,21 @@ Duke.prototype.reset = function(x, y, health) {
 }
 
 Duke.prototype.changeWeapon = function(weapon) {
-	this.weapons[this.currentWeapon].visible = false;
-	this.weapons[this.currentWeapon].callAll('reset', null, 0, 0);
-	this.weapons[this.currentWeapon].setAll('exists', false);
+	if (this.game.Duke.currentWeapon > -1) {
+		this.game.Duke.weapons[this.game.Duke.currentWeapon].visible = false;
+		this.game.Duke.weapons[this.game.Duke.currentWeapon].callAll('reset', null, 0, 0);
+		this.game.Duke.weapons[this.game.Duke.currentWeapon].setAll('exists', false);
+	}
 
-	this.currentWeapon = weapon;
-	this.weapon[this.currentWeapon].visible = true;
+	this.game.Duke.currentWeapon = weapon;
+	this.game.Duke.weapons[this.game.Duke.currentWeapon].visible = true;
+}
+
+Duke.prototype.handleBulletEnemyCollision = function(element, index, array) {
+	this.game.physics.arcade.collide(element.sprite, this.game.Duke.weapons[this.game.Duke.currentWeapon], this.game.Duke.hurtEnemy, null, this);
+}
+
+Duke.prototype.hurtEnemy = function(enemy, bullet) {
+	enemy.health -= bullet.damage;
+	//bullet.kill();
 }
