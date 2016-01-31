@@ -160,20 +160,20 @@ Duke.prototype.render = function(){
 	this.colliderSprite.immovable = true;
 	this.colliderSprite.body.collideWorldBounds = true;
 
-	this.headSprite.animations.add('normalHeadLeft', [0], 1, true);
-	this.headSprite.animations.add('normalHeadRight', [1], 1, true);
-	this.headSprite.animations.add('normalHeadUp', [2], 1, true);
-	this.headSprite.animations.add('normalHeadDown', [3], 1, true);
+	this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
+	this.headSprite.animations.add('normalHeadRight', [1], 10, true);
+	this.headSprite.animations.add('normalHeadUp', [2], 10, true);
+	this.headSprite.animations.add('normalHeadDown', [3], 10, true);
 
-	this.torsoSprite.animations.add('normalTorsoLeft', [9, 10, 9, 11], 1, true);
-	this.torsoSprite.animations.add('normalTorsoRight', [3, 4, 3, 5], 1, true);
-	this.torsoSprite.animations.add('normalTorsoUp', [0, 1, 0, 2], 1, true);
-	this.torsoSprite.animations.add('normalTorsoDown', [6, 7, 6, 8], 1, true);
+	this.torsoSprite.animations.add('normalTorsoLeft', [9, 10, 9, 11], 10, true);
+	this.torsoSprite.animations.add('normalTorsoRight', [3, 4, 3, 5], 10, true);
+	this.torsoSprite.animations.add('normalTorsoUp', [0, 1, 0, 2], 10, true);
+	this.torsoSprite.animations.add('normalTorsoDown', [6, 7, 6, 8], 10, true);
 
-	this.legsSprite.animations.add('normalLegsLeft', [9, 10, 9, 11], 1, true);
-	this.legsSprite.animations.add('normalLegsRight', [3, 4, 3, 5], 1, true);
-	this.legsSprite.animations.add('normalLegsUp', [0, 1, 0, 2], 1, true);
-	this.legsSprite.animations.add('normalLegsDown', [6, 7, 6, 8], 1, true);
+	this.legsSprite.animations.add('normalLegsLeft', [9, 10, 9, 11], 10, true);
+	this.legsSprite.animations.add('normalLegsRight', [3, 4, 3, 5], 10, true);
+	this.legsSprite.animations.add('normalLegsUp', [0, 1, 0, 2], 10, true);
+	this.legsSprite.animations.add('normalLegsDown', [6, 7, 6, 8], 10, true);
 
 	// this.headSprite.animations.add('normalHeadLeft', [0], 10, true);
 	// this.headSprite.animations.add('normalHeadRight', [0], 10, true);
