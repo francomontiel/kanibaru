@@ -11,6 +11,10 @@ function Duke(game){
 	this.facing = 0; //Left=0; Right=1; Up=2; Down=3
 	this.sprite = null;
 	this.timeDamaged = 0;
+	this.weapons = [];
+	this.currentWeapon = 0;
+	this.isMoving = false;
+	this.chargeTime = 0;
 }
 
 Duke.prototype.update = function(){
@@ -25,6 +29,7 @@ Duke.prototype.update = function(){
 	this.game.Duke.colliderSprite.body.velocity.x = 0;
 
 	this.handleKeyDown();
+	//this.handleKeyUp();
 
 	this.game.Duke.timeDamaged--;
 	if (this.game.Duke.timeDamaged > 40) {
@@ -35,8 +40,10 @@ Duke.prototype.update = function(){
 };
 
 Duke.prototype.handleKeyDown = function() {
-	if(this.game.cursors.up.isDown){
+	this.isMoving = false;
+	if (this.game.cursors.up.isDown){
 		this.facing = 2;
+		this.isMoving = true;
 
 		//this.game.Duke.headSprite.body.velocity.y = -this.speed;
 		//this.game.Duke.torsoSprite.body.velocity.y = -this.speed;
@@ -46,8 +53,10 @@ Duke.prototype.handleKeyDown = function() {
 		this.headSprite.play('normalHeadUp');
 		this.torsoSprite.play('normalTorsoUp');
 		this.legsSprite.play('normalLegsUp');
-	} else if(this.game.cursors.down.isDown){
+	}
+	if (this.game.cursors.down.isDown){
 		this.facing = 3;
+		this.isMoving = true;
 
 		//this.game.Duke.headSprite.body.velocity.y = this.speed;
 		//this.game.Duke.torsoSprite.body.velocity.y = this.speed;
@@ -57,8 +66,10 @@ Duke.prototype.handleKeyDown = function() {
 		this.headSprite.play('normalHeadDown');
 		this.torsoSprite.play('normalTorsoDown');
 		this.legsSprite.play('normalLegsDown');
-	} else if(this.game.cursors.left.isDown){
+	}
+	if (this.game.cursors.left.isDown){
 		this.facing = 0;
+		this.isMoving = true;
 
 		//this.game.Duke.headSprite.body.velocity.x = -this.speed;
 		//this.game.Duke.torsoSprite.body.velocity.x = -this.speed;
@@ -68,8 +79,10 @@ Duke.prototype.handleKeyDown = function() {
 		this.headSprite.play('normalHeadLeft');
 		this.torsoSprite.play('normalTorsoLeft');
 		this.legsSprite.play('normalLegsLeft');
-	} else if(this.game.cursors.right.isDown){
+	}
+	if (this.game.cursors.right.isDown){
 		this.facing = 1;
+		this.isMoving = true;
 
 		//this.game.Duke.headSprite.body.velocity.x = this.speed;
 		//this.game.Duke.torsoSprite.body.velocity.x = this.speed;
@@ -79,7 +92,7 @@ Duke.prototype.handleKeyDown = function() {
 		this.headSprite.play('normalHeadRight');
 		this.torsoSprite.play('normalTorsoRight');
 		this.legsSprite.play('normalLegsRight');
-	} else {
+	} if (!this.isMoving) {
 		this.headSprite.animations.stop();
 		this.torsoSprite.animations.stop();
 		this.legsSprite.animations.stop();
@@ -109,12 +122,26 @@ Duke.prototype.handleKeyDown = function() {
 		}
 	}
 
+	if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) {
+		this.chargeTime++;
+	}
+
 	this.headSprite.x = this.colliderSprite.x - this.headSprite.width / 2;
 	this.headSprite.y = this.colliderSprite.y - this.headSprite.height / 2;
 	this.torsoSprite.x = this.headSprite.x;
 	this.torsoSprite.y = this.headSprite.y;
 	this.legsSprite.x = this.headSprite.x;
 	this.legsSprite.y = this.headSprite.y;
+}
+
+Duke.prototype.handleKeyUp = function(e) {
+	if (e.keyCode == Phaser.Keyboard.SPACEBAR) {
+		var dangle = 25 - Math.min(25, this.game.Duke.chargeTime / 8);
+		var dspeed = Math.min(300, this.game.Duke.chargeTime * 5);
+		this.game.Duke.chargeTime++;
+		this.game.Duke.weapons[this.game.Duke.currentWeapon].fire(this.game.Duke.colliderSprite, this.game.Duke.facing, dangle, dspeed);
+		this.game.Duke.chargeTime = 0;
+	}
 }
 
 Duke.prototype.render = function(){
@@ -167,6 +194,15 @@ Duke.prototype.render = function(){
 	this.colliderSprite.x = this.headSprite.x + this.headSprite.width / 2;
 	this.colliderSprite.y = this.headSprite.y + this.headSprite.height / 2;
 	//this.colliderSprite.angle = 135;
+
+	//this.weapons.push(new Weapon.FirestoneBullet(this.game));
+	this.weapons.push(new Weapon.StoneBullet(this.game));
+	this.weapons.push(new Weapon.FirestoneBullet(this.game));
+	for (var i = 1; i < this.weapons.length; i++) {
+		this.weapons[i].visible = false;
+	}
+
+	this.game.input.keyboard.onUpCallback = this.game.Duke.handleKeyUp;
 };
 
 Duke.prototype.changeHead = function(newHead){
@@ -197,7 +233,7 @@ Duke.prototype.handleEnemyCollision = function(duke, enemy){
 Duke.prototype.handleBulletCollision = function(duke, bullet){
 	bullet.kill();
 	if (this.game.Duke.timeDamaged <= 0 && this.game.Duke.health > 0) {
-		this.game.Duke.health -= bullet.playerDamage;
+		this.game.Duke.health -= bullet.damage;
 		this.game.Duke.timeDamaged = 50;
 		console.log(this.game.Duke.health);
 	}
@@ -207,4 +243,13 @@ Duke.prototype.reset = function(x, y, health) {
 	this.game.Duke.colliderSprite.x = x;
 	this.game.Duke.colliderSprite.y = y;
 	this.game.Duke.health = health;
+}
+
+Duke.prototype.changeWeapon = function(weapon) {
+	this.weapons[this.currentWeapon].visible = false;
+	this.weapons[this.currentWeapon].callAll('reset', null, 0, 0);
+	this.weapons[this.currentWeapon].setAll('exists', false);
+
+	this.currentWeapon = weapon;
+	this.weapon[this.currentWeapon].visible = true;
 }
