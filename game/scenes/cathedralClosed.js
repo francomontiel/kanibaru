@@ -29,7 +29,7 @@ States.CathedralClosed.prototype = {
 		this.createObstacle(516, 220, 33, 390);
 		this.createObstacle(337, 587, 91, 243);
 		this.createObstacle(0, 0, 225, 1429);
-		this.createObstacle(1803, 0, 397, 258);
+		this.createObstacle(1822, 0, 397, 258);
 		this.createObstacle(2093, 252, 107, 69);
 
 		//me lo paro "El taxi" me lo paroo

@@ -8,6 +8,8 @@ function Duke(game){
 	this.torso = 'normalTorso';
 	this.legs = 'normalLegs';
 	this.speed = 500;
+	//this.speed = 150;
+	this.speed = 300;
 	this.facing = 0; //Left=0; Right=1; Up=2; Down=3
 	this.sprite = null;
 	this.timeDamaged = 0;
@@ -203,7 +205,9 @@ Duke.prototype.render = function(){
 	this.weapons.push(new Weapon.StoneBullet(this.game));
 	this.weapons.push(new Weapon.FirestoneBullet(this.game));
 	for (var i = 0; i < this.weapons.length; i++) {
-		this.weapons[i].visible = false;
+		if (i != this.currentWeapon) {
+			this.weapons[i].visible = false;
+		}
 	}
 
 	this.game.input.keyboard.onUpCallback = this.game.Duke.handleKeyUp;
