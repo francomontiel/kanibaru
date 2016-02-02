@@ -79,7 +79,7 @@ States.Mine.prototype = {
 		this.game.tio = new TioSupay(game, 350, 550, 750, 100, 2)
 		this.game.tio.render();
 		this.game.enemies.push(this.game.tio);
-		this.game.tio.sprite.visible = false;
+		//this.game.tio.sprite.visible = false;
 
 		this.game.redSplash = this.game.add.sprite(0, 0, 'redSplash');
 		this.game.redSplash.alpha = 0;

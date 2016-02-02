@@ -140,7 +140,7 @@ Weapon.StoneBullet = function (game) {
     this.bulletSpeed = 500;
     this.fireRate = 400;
 
-    for (var i = 0; i < 64; i++)
+    for (var i = 0; i < 100; i++)
     {
         this.add(new Bullet(game, 'bulletStone1', 15), true);
         this.getChildAt(i).body.bounce.setTo(0.2, 0.2);
@@ -197,7 +197,7 @@ Weapon.FirestoneBullet = function (game) {
     this.bulletSpeed = 700;
     this.fireRate = 400;
 
-    for (var i = 0; i < 64; i++)
+    for (var i = 0; i < 100; i++)
     {
         this.add(new Bullet(game, 'bulletFireStone1', 35), true);
         this.getChildAt(i).body.bounce.setTo(0.1, 0.1);
