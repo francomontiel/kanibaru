@@ -1,0 +1,15 @@
+{
+  "name": "kanibaru",
+  "version": "1.0.0",
+  "description": "Game developed for GGJ2015",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Vinze Gonzales, Leandro Guardia, Allan Leon, Franco Montiel, Leonardo Velarde",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/francomontiel/kanibaru.git"
+  }
+}
